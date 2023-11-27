@@ -12,8 +12,8 @@ import java.util.List;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
-    @Query("SELECT f FROM Funcionario f WHERE f.nome = :nome")
-    List<Funcionario> buscarPorNome(@Param("nome") String nome);
+    @Query("SELECT f FROM Funcionario f WHERE f.nomeFuncionario = :nomeFuncionario")
+    List<Funcionario> findByName(@Param("nomeFuncionario") String nomeFuncionario);
     @Query("SELECT e FROM Funcionario e WHERE e.ativo = :ativo")
     List<Funcionario> findByAtivo(@Param("ativo") boolean ativo);
 

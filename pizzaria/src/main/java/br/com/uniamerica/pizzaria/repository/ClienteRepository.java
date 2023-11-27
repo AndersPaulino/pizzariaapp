@@ -12,14 +12,14 @@ import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    @EntityGraph(attributePaths = "endereco")
-    Cliente findByNome(String nome);
+    @Query("SELECT e FROM Cliente e WHERE e.nomeCliente = :nomeCliente")
+    List<Cliente> findByName(@Param("nomeCliente") String nomeCliente);
 
-    @EntityGraph(attributePaths = "endereco")
-    Cliente findByCpf(String cpf);
+    @Query("SELECT e FROM Cliente e WHERE e.cpf = :cpf")
+    List<Cliente> findByCpf(@Param("cpf") String cpf);
 
     @Query("SELECT e FROM Cliente e WHERE e.ativo = :ativo")
-    public List<Cliente> findByAtivo(@Param("ativo") boolean ativo);
+    List<Cliente> findByAtivo(@Param("ativo") boolean ativo);
 
     @Query("SELECT e FROM Cliente e WHERE DATE(e.registro) = :registro")
     List<Cliente> findByDiaRegistro(@Param("registro") LocalDate registro);
