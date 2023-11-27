@@ -1,7 +1,6 @@
 package br.com.uniamerica.pizzaria.repository;
 
 import br.com.uniamerica.pizzaria.entity.Cliente;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,10 +12,10 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("SELECT e FROM Cliente e WHERE e.nomeCliente = :nomeCliente")
-    List<Cliente> findByName(@Param("nomeCliente") String nomeCliente);
+    Cliente findByName(@Param("nomeCliente") String nomeCliente);
 
     @Query("SELECT e FROM Cliente e WHERE e.cpf = :cpf")
-    List<Cliente> findByCpf(@Param("cpf") String cpf);
+    Cliente findByCpf(@Param("cpf") String cpf);
 
     @Query("SELECT e FROM Cliente e WHERE e.ativo = :ativo")
     List<Cliente> findByAtivo(@Param("ativo") boolean ativo);

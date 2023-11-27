@@ -1,6 +1,5 @@
 package br.com.uniamerica.pizzaria.repository;
 
-import br.com.uniamerica.pizzaria.entity.Endereco;
 import br.com.uniamerica.pizzaria.entity.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +12,7 @@ import java.util.List;
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
     @Query("SELECT f FROM Funcionario f WHERE f.nomeFuncionario = :nomeFuncionario")
-    List<Funcionario> findByName(@Param("nomeFuncionario") String nomeFuncionario);
+    Funcionario findByName(@Param("nomeFuncionario") String nomeFuncionario);
     @Query("SELECT e FROM Funcionario e WHERE e.ativo = :ativo")
     List<Funcionario> findByAtivo(@Param("ativo") boolean ativo);
 
