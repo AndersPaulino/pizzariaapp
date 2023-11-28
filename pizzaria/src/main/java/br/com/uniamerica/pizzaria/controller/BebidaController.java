@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -140,8 +141,12 @@ public class BebidaController {
     }
 
     @GetMapping("erro")
-    private ResponseEntity<List<BebidaDTO>> exemploErro(){
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<BebidaDTO>> exemploErro() {
+        // Aqui você deve criar um objeto de lista vazia ou com dados para retornar
+        List<BebidaDTO> listaVazia = new ArrayList<>(); // Ou outra forma de criar a lista desejada
+
+        return ResponseEntity.badRequest().body(listaVazia);
     }
+
 
 }

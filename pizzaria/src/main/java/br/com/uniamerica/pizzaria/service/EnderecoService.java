@@ -1,12 +1,8 @@
 package br.com.uniamerica.pizzaria.service;
 
-import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.dto.EnderecoDTO;
-import br.com.uniamerica.pizzaria.dto.atualizar.ClienteAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.EnderecoAtualizarDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.ClienteCadastroDTO;
 import br.com.uniamerica.pizzaria.dto.cadastro.EnderecoCadastroDTO;
-import br.com.uniamerica.pizzaria.entity.Cliente;
 import br.com.uniamerica.pizzaria.entity.Endereco;
 import br.com.uniamerica.pizzaria.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,24 +79,28 @@ public class EnderecoService {
     }
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
     public void atualizar(Long id, Endereco endereco){
-        Optional<Endereco> endereco1 = enderecoRepository.findById(id);
-        Endereco endereco2 = endereco1.get();
-        if (endereco1.isPresent()){
-            enderecoRepository.save(endereco2);
-        }else {
-            throw new IllegalArgumentException("Id do Endereço não encontrado!");
-        }
-    }
-    public void deleteEndereco(Long id){
-        Endereco endereco = enderecoRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Endereço não encontrador com ID: " + id));
-        enderecoRepository.delete(endereco);
-    }
-    public void desativar(Long id){
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
-        Endereco endereco = enderecoOptional.get();
 
         if (enderecoOptional.isPresent()){
+            Endereco enderecoExistente = enderecoOptional.get();
+            enderecoRepository.save(enderecoExistente);
+        } else {
+            throw new IllegalArgumentException("Endereço não encontrado com ID: " + id);
+        }
+    }
+
+    public void deleteEndereco(Long id){
+        Endereco endereco = enderecoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Endereço não encontrado com ID: " + id));
+
+        enderecoRepository.delete(endereco);
+    }
+
+    public void desativar(Long id){
+        Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
+
+        if (enderecoOptional.isPresent()){
+            Endereco endereco = enderecoOptional.get();
             endereco.setAtivo(false);
             enderecoRepository.save(endereco);
             throw new IllegalArgumentException("Endereço desativado com sucesso!");
@@ -108,4 +108,5 @@ public class EnderecoService {
             throw new IllegalArgumentException("ID do endereço inválido!");
         }
     }
+
 }

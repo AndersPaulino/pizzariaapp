@@ -1,10 +1,7 @@
 package br.com.uniamerica.pizzaria.controller;
 
-import br.com.uniamerica.pizzaria.dto.BebidaDTO;
 import br.com.uniamerica.pizzaria.dto.ClienteDTO;
-import br.com.uniamerica.pizzaria.dto.atualizar.BebidaAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.ClienteAtualizarDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.BebidaCadastroDTO;
 import br.com.uniamerica.pizzaria.dto.cadastro.ClienteCadastroDTO;
 import br.com.uniamerica.pizzaria.entity.Cliente;
 import br.com.uniamerica.pizzaria.service.ClienteService;

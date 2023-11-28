@@ -1,14 +1,8 @@
 package br.com.uniamerica.pizzaria.service;
 
-import br.com.uniamerica.pizzaria.dto.ClienteDTO;
-import br.com.uniamerica.pizzaria.dto.EnderecoDTO;
 import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
-import br.com.uniamerica.pizzaria.dto.atualizar.EnderecoAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.FuncionarioAtualizarDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.EnderecoCadastroDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.FuncionarioCadastradoDTO;
-import br.com.uniamerica.pizzaria.entity.Cliente;
-import br.com.uniamerica.pizzaria.entity.Endereco;
+import br.com.uniamerica.pizzaria.dto.cadastro.FuncionarioCadastroDTO;
 import br.com.uniamerica.pizzaria.entity.Funcionario;
 import br.com.uniamerica.pizzaria.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FuncionarioService {
@@ -54,11 +47,11 @@ public class FuncionarioService {
     }
 
     @Transactional(readOnly = true)
-    public List<FuncionarioCadastradoDTO> findByDiaRegistro(LocalDate registro){
+    public List<FuncionarioCadastroDTO> findByDiaRegistro(LocalDate registro){
         List<Funcionario> funcionarios = funcionarioRepository.findByDiaRegistro(registro);
 
         return funcionarios.stream()
-                .map(FuncionarioCadastradoDTO::new)
+                .map(FuncionarioCadastroDTO::new)
                 .toList();
     }
 
