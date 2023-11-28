@@ -1,6 +1,5 @@
 package br.com.uniamerica.pizzaria.dto;
 
-import br.com.uniamerica.pizzaria.entity.Bebida;
 import br.com.uniamerica.pizzaria.entity.Cliente;
 import lombok.Getter;
 import lombok.Setter;

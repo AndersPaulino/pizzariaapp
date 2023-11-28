@@ -65,13 +65,15 @@ public class VendaService {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
     public void atualizar(Long id, Venda venda){
         Optional<Venda> vendaOptional = vendaRepository.findById(id);
-        Venda venda1 = vendaOptional.get();
+
         if (vendaOptional.isPresent()){
-            vendaRepository.save(venda1);
+            Venda vendaExistente = vendaOptional.get();
+            vendaRepository.save(vendaExistente);
         } else {
-            throw new IllegalArgumentException("Id da venda não econtrado!");
+            throw new IllegalArgumentException("Id da venda não encontrado!");
         }
     }
+
 
     public void deleteVenda(Long id){
         Venda venda = vendaRepository.findById(id)

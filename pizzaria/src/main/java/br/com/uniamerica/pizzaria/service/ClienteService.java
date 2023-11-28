@@ -78,21 +78,27 @@ public class ClienteService {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
-    public void atualizar(Long id, Cliente cliente){
+    public void atualizar(Long id, Cliente cliente) {
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        Cliente cliente1 = clienteOptional.get();
-        if (clienteOptional.isPresent()){
+
+        if (clienteOptional.isPresent()) {
+            Cliente cliente1 = clienteOptional.get();
             clienteRepository.save(cliente1);
-        }else {
+        } else {
             throw new IllegalArgumentException("Id do Cliente não encontrado!");
         }
     }
 
-    public void deleteClient(Long id){
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Client não encontrado com ID: " + id));
-        clienteRepository.delete(cliente);
+    public void deleteClient(Long id) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+
+        if (clienteOptional.isPresent()) {
+            clienteRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Id do Cliente não encontrado!");
+        }
     }
+
 
     public void desativar(Long id){
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);

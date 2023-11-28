@@ -1,12 +1,8 @@
 package br.com.uniamerica.pizzaria.controller;
 
-import br.com.uniamerica.pizzaria.dto.BebidaDTO;
 import br.com.uniamerica.pizzaria.dto.EnderecoDTO;
-import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.EnderecoAtualizarDTO;
-import br.com.uniamerica.pizzaria.dto.atualizar.FuncionarioAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.cadastro.EnderecoCadastroDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.FuncionarioCadastradoDTO;
 import br.com.uniamerica.pizzaria.entity.Endereco;
 import br.com.uniamerica.pizzaria.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
