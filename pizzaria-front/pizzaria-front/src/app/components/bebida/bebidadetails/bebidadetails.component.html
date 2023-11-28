@@ -1,1 +1,11 @@
-<p>bebidadetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="exampleInputText1" class="form-label">Nome:</label>
+        <input type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp" [(ngModel)]="bebida.nomeBebida">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Valor:</label>
+        <input type="number" class="form-control" name="exampleInputPassword1" [(ngModel)]="bebida.valorBebida">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

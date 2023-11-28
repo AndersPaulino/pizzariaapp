@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BebidaDetailsComponent } from './bebidadetails.component';
+import { Bebida } from 'src/app/models/bebida/bebida';
 
-import { BebidadetailsComponent } from './bebidadetails.component';
-
-describe('BebidadetailsComponent', () => {
-  let component: BebidadetailsComponent;
-  let fixture: ComponentFixture<BebidadetailsComponent>;
+describe('BebidaDetailsComponent', () => {
+  let component: BebidaDetailsComponent;
+  let fixture: ComponentFixture<BebidaDetailsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BebidadetailsComponent]
+      declarations: [BebidaDetailsComponent]
     });
-    fixture = TestBed.createComponent(BebidadetailsComponent);
+    fixture = TestBed.createComponent(BebidaDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -18,4 +18,14 @@ describe('BebidadetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit bebida when salvar is called', () => {
+    const bebida = new Bebida();
+    spyOn(component.retorno, 'emit');
+    component.bebida = bebida;
+    component.salvar();
+    expect(component.retorno.emit).toHaveBeenCalledWith(bebida);
+  });
+
+
 });
