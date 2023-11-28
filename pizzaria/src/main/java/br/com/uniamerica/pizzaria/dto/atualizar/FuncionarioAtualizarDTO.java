@@ -1,9 +1,11 @@
 package br.com.uniamerica.pizzaria.dto.atualizar;
 
 import br.com.uniamerica.pizzaria.entity.Funcionario;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Getter @Setter
 public class FuncionarioAtualizarDTO {
     private Long id;
     private String nomeFuncionario;

@@ -20,8 +20,11 @@ public class UserService implements UserDetailsService {
 
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+        return users.stream()
+                .map(UserDTO::new)
+                .toList(); // Utilizando o método toList() em vez de Collectors.toList()
     }
+
 
     public UserDTO createUser(UserDTO userDTO) {
         User user = new User();

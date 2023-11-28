@@ -35,9 +35,12 @@ public class PizzaService {
     }
     @Transactional(readOnly = true)
     public List<PizzaDTO> findAll() {
-        List<Pizza> pizzass = pizzaRepository.findAll();
-        return pizzass.stream().map(PizzaDTO::new).collect(Collectors.toList());
+        List<Pizza> pizzas = pizzaRepository.findAll();
+        return pizzas.stream()
+                .map(PizzaDTO::new)
+                .toList(); // Utilizando o método toList() para coletar os elementos do stream em uma lista
     }
+
 
     @Transactional(readOnly = true)
     public List<PizzaDTO> findByAtivo(boolean ativo){

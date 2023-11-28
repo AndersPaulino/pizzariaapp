@@ -52,6 +52,7 @@ import { VendadetailsComponent } from './components/venda/vendadetails/vendadeta
     AppRoutingModule,
     HttpClientModule,
     NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

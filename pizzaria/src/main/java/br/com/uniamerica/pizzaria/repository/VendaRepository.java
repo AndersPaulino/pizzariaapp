@@ -1,6 +1,6 @@
 package br.com.uniamerica.pizzaria.repository;
 
-import br.com.uniamerica.pizzaria.entity.Cliente;
+
 import br.com.uniamerica.pizzaria.entity.Venda;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

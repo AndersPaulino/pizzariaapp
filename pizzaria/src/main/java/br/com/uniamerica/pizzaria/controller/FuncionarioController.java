@@ -1,11 +1,8 @@
 package br.com.uniamerica.pizzaria.controller;
 
-import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
-import br.com.uniamerica.pizzaria.dto.atualizar.ClienteAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.FuncionarioAtualizarDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.ClienteCadastroDTO;
-import br.com.uniamerica.pizzaria.dto.cadastro.FuncionarioCadastradoDTO;
+import br.com.uniamerica.pizzaria.dto.cadastro.FuncionarioCadastroDTO;
 import br.com.uniamerica.pizzaria.entity.Funcionario;
 import br.com.uniamerica.pizzaria.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -68,9 +66,9 @@ public class FuncionarioController {
     }
 
     @GetMapping("registro/dia/{registro}")
-    public ResponseEntity<List<FuncionarioCadastradoDTO>> findByDiaRegistro(@PathVariable("registro") LocalDate registro) {
+    public ResponseEntity<List<FuncionarioCadastroDTO>> findByDiaRegistro(@PathVariable("registro") LocalDate registro) {
         try {
-            List<FuncionarioCadastradoDTO> funcionarioDTOS = funcionarioService.findByDiaRegistro(registro);
+            List<FuncionarioCadastroDTO> funcionarioDTOS = funcionarioService.findByDiaRegistro(registro);
 
             if (!funcionarioDTOS.isEmpty()) {
                 return ResponseEntity.ok(funcionarioDTOS);
@@ -128,7 +126,10 @@ public class FuncionarioController {
     }
 
     @GetMapping("erro")
-    private ResponseEntity<List<FuncionarioDTO>> exemploErro(){
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<FuncionarioDTO>> exemploErro() {
+        List<FuncionarioDTO> listaVazia = Collections.emptyList(); // Utilizando uma lista vazia
+
+        return ResponseEntity.badRequest().body(listaVazia);
     }
+
 }

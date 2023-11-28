@@ -7,20 +7,20 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter @Setter
-public class FuncionarioCadastradoDTO {
+public class FuncionarioCadastroDTO {
     private Long id;
     private String nomeFuncionario;
     private boolean ativo;
     private LocalDateTime registro;
 
-    public FuncionarioCadastradoDTO(Funcionario funcionario){
+    public FuncionarioCadastroDTO(Funcionario funcionario){
         id = funcionario.getId();
         nomeFuncionario = funcionario.getNomeFuncionario();
         ativo = funcionario.isAtivo();
         registro = funcionario.getRegistro();
     }
 
-    public FuncionarioCadastradoDTO(Long id, String nomeFuncionario, boolean ativo, LocalDateTime registro){
+    public FuncionarioCadastroDTO(Long id, String nomeFuncionario, boolean ativo, LocalDateTime registro){
         this.id = id;
         this.nomeFuncionario = nomeFuncionario;
         this.ativo = ativo;

@@ -27,7 +27,7 @@ public class Venda extends AbsctractEntity{
     @JoinTable(name = "venda_pizza",
             joinColumns = @JoinColumn(name = "venda_id"),
             inverseJoinColumns = @JoinColumn(name = "pizza_id"))
-    private List<Pizza> Pizzas = new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<>();
 
     @Getter @Setter
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
