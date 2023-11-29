@@ -1,1 +1,45 @@
-<p>pizzadetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="tamanhoSelect" class="form-label">Tamanho:</label>
+        <select id="tamanhoSelect" class="form-control" name="tamanhoSelect" [(ngModel)]="pizza.tamanho" (change)="onTamanhoChange()">
+            <option value="PEQUENA">PEQUENA</option>
+            <option value="MEDIA">MEDIA</option>
+            <option value="GRANDE">GRANDE</option>
+            <option value="FAMILIA">FAMILIA</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="lancar(modal1)">Lançar Sabor</button> 
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Sabor</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sabor of pizza.sabor let i = index">
+                <th scope="row">{{ sabor.id }}</th>
+                <td> {{ sabor.nomeSabor }} </td>
+                <td> <button type="button" class="btn btn-primary" (click)="excluir(pizza,i)">Excluir</button> </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<ng-template #modal1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+       
+        <app-saborlist [modoLancamento]="true" (retorno)="retornoSaborList($event)" ></app-saborlist>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
