@@ -1,29 +1,23 @@
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-lg-4">
-            <br>
-        </div>
-        <div class="col-lg-4">
-            <form (ngSubmit)="logar()">
-                <div class="mb-3">
-                    <label for="exampleInputText1" class="form-label">Login:</label>
-                    <input type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp"
-                        [(ngModel)]="usuario.login">
+<section class="section">
+    <div class="container">
+        <h1 class="nome_pizzaria">Midnight Flavor Pizza</h1>
+        <p class="tagline">Sabores que Encantam a Noite!</p>
+        
+        <div class="row justify-content-center">
+            <form (ngSubmit)="logar()" class="login-form">
+                <div class="form-group">
+                    <label for="loginInput">Login:</label>
+                    <input type="text" class="form-control" id="loginInput" name="loginInput" [(ngModel)]="usuario.login" required>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Senha:</label>
-                    <input type="password" class="form-control" name="exampleInputPassword1"
-                        [(ngModel)]="usuario.senha">
+                
+                <div class="form-group">
+                    <label for="senhaInput">Senha:</label>
+                    <input type="password" class="form-control" id="senhaInput" name="senhaInput" [(ngModel)]="usuario.senha" required>
                 </div>
+        
                 <button type="submit" class="btn btn-primary">Logar</button>
             </form>
         </div>
-        <div class="col-lg-4">
-            <br>
-        </div>
-
+        
     </div>
-
-</div>
+</section>

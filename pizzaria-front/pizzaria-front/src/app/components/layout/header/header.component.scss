@@ -1,0 +1,36 @@
+.navbar {
+    background-color: #020300; /* Dark Blue */
+  }
+  
+  /* Estilo para os itens do menu */
+  .navbar-nav .nav-item {
+    margin-right: 10px;
+  }
+  
+  /* Estilo para os links do menu */
+  .navbar-nav .nav-item a.nav-link {
+    color: #020300; /* White */
+    transition: color 0.3s;
+  }
+  
+  /* Estilo para os links ativos do menu */
+  .navbar-nav .nav-item a.nav-link.active {
+    color: #F24333; /* Vermilion */
+    font-weight: bold;
+  }
+  
+  /* Estilo para os links do menu ao passar o mouse */
+  .navbar-nav .nav-item a.nav-link:hover {
+    color: #1F01B9; /* Dark Blue */
+  }
+  
+  /* Estilo para o link "Sair" */
+  .navbar-nav .nav-item a.nav-link[href="/login"] {
+    color: #F24333; /* Vermilion */
+    font-weight: bold;
+  }
+  
+  /* Estilo para o link "Sair" ao passar o mouse */
+  .navbar-nav .nav-item a.nav-link[href="/login"]:hover {
+    color: #1F01B9; /* Dark Blue */
+  }

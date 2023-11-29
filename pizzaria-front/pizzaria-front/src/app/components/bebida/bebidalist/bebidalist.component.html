@@ -1,6 +1,6 @@
-<!-- bebida.component.html -->
-<div class="container">
-    <h3 class="alert alert-primary">Listagem de Bebidas!</h3>
+<section>
+  <div class="container">
+    <h3 class="alert">Bebidas!</h3>
     <td><button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button></td>
     <div class="row">
       <div class="col-lg-12">
@@ -38,16 +38,19 @@
     </div>
   </div>
 <ng-template #modal1 let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Atualizar Bebida</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
+  <div class="modal-header">
+    <h4 class="modal-title">Atualizar Bebida</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
 
-        <app-bebida-details [bebida]="bebidaSelecionadaParaEdicao" (retorno)="addOuEditarBebida($event)"></app-bebida-details>
+    <app-bebida-details [bebida]="bebidaSelecionadaParaEdicao"
+      (retorno)="addOuEditarBebida($event)"></app-bebida-details>
 
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
 </ng-template>
+
+</section>
