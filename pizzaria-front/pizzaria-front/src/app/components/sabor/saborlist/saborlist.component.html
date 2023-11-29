@@ -1,1 +1,52 @@
-<p>saborlist works!</p>
+<!-- sabor.component.html -->
+<div class="container">
+    <h3 class="alert alert-primary">Listagem de Sabores!</h3>
+    <td><button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button></td>
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Ativo</th>
+              <th scope="col">Registro</th>
+              <th scope="col">Atualizar</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sabor of lista; let i = index">
+              <th scope="row">{{ sabor.id }}</th>
+              <td>{{ sabor.nomeSabor }}</td>
+              <td>{{ sabor.ativo ? 'Sim' : 'Não' }}</td>
+              <td>{{ sabor.registro | date }}</td>
+              <td>{{ sabor.atualizar | date }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="editar(modal1, sabor, i)">Editar</button>
+                <button class="btn btn-danger" (click)="deletar(sabor.id)">Excluir</button>
+              </td>
+              <td *ngIf="modoLancamento">
+                <button type="button" class="btn btn-primary" (click)="lancamento(sabor)">Lançar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<ng-template #modal1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Atualizar Sabor</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-sabordetails [sabor]="saborSelecionadaParaEdicao" (retorno)="addOuEditarSabor($event)"></app-sabordetails>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
