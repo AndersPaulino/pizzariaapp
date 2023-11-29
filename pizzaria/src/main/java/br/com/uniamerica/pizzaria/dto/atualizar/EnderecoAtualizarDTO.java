@@ -17,13 +17,15 @@ public class EnderecoAtualizarDTO {
 
     public EnderecoAtualizarDTO(Endereco endereco){
         id = endereco.getId();
+        ativo = endereco.isAtivo();
         bairro = endereco.getBairro();
         rua = endereco.getRua();
         numero = endereco.getNumero();
         atualizar = endereco.getAtualizar();
     }
-    public EnderecoAtualizarDTO(Long id, String bairro, String rua, int numero, LocalDateTime atualizar){
+    public EnderecoAtualizarDTO(Long id, boolean ativo, String bairro, String rua, int numero, LocalDateTime atualizar){
         this.id = id;
+        this.ativo = ativo;
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;

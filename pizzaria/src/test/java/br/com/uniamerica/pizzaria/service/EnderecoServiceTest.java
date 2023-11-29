@@ -58,4 +58,32 @@ class EnderecoServiceTest {
         assertFalse(endereco.isAtivo());
         verify(enderecoRepository, times(1)).save(endereco);
     }
+    @Test
+    void testBuscarEnderecosPorRua() {
+        enderecoRepository = mock(EnderecoRepository.class);
+        enderecoService = new EnderecoService(enderecoRepository);
+        Endereco enderecos = new Endereco();
+
+        String rua = "Rua ABC";
+        List<EnderecoDTO> enderecoList = Collections.singletonList(new EnderecoDTO(enderecos));
+        when(enderecoRepository.findByRua(rua)).thenReturn(enderecoList);
+
+        List<EnderecoDTO> result = enderecoService.buscarEnderecosPorRua(rua);
+        assertEquals(enderecoList.size(), result.size());
+
+        verify(enderecoRepository, times(1)).findByRua(rua);
+    }
+
+    // Write similar tests for other methods like buscarEnderecosPorNumero, findAll, findById, findByAtivo, findByDiaRegistro, findByDiaAtualizar
+
+    @Test
+    void testCadastrar() {
+        enderecoRepository = mock(EnderecoRepository.class);
+        enderecoService = new EnderecoService(enderecoRepository);
+
+        Endereco endereco = new Endereco();
+        assertDoesNotThrow(() -> enderecoService.cadastrar(endereco));
+
+        verify(enderecoRepository, times(1)).save(endereco);
+    }
 }

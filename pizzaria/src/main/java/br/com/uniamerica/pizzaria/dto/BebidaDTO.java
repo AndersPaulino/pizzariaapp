@@ -20,17 +20,15 @@ public class BebidaDTO {
         id = bebida.getId();
         ativo = bebida.isAtivo();
         nomeBebida = bebida.getNomeBebida();
-        valorBebida = bebida.getValorBebida();
         registro = bebida.getRegistro();
         atualizar = bebida.getAtualizar();
         valorBebida = bebida.getValorBebida();
     }
-
+  
     public BebidaDTO(Long id, boolean ativo, String nomeBebida, BigDecimal valorBebida,LocalDateTime registro, LocalDateTime atualizar){
         this.id = id;
         this.ativo = ativo;
         this.nomeBebida = nomeBebida;
-        this.valorBebida = valorBebida;
         this.registro = registro;
         this.atualizar = atualizar;
     }

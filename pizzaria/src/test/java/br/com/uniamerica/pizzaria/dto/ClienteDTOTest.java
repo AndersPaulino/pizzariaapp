@@ -1,11 +1,14 @@
 package br.com.uniamerica.pizzaria.dto;
 
 import br.com.uniamerica.pizzaria.entity.Cliente;
+import br.com.uniamerica.pizzaria.entity.Endereco;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,7 +32,10 @@ class ClienteDTOTest {
 
     @Test
     void testeConstructorWithIndividualsParameters(){
-        clienteDTO = new ClienteDTO(1L, true, "Anderson", LocalDateTime.now(), LocalDateTime.now());
+        List<Endereco> enderecos = new ArrayList<>();
+        enderecos.add(new Endereco());
+        enderecos.add(new Endereco());
+        clienteDTO = new ClienteDTO(1L, true, "Anderson", LocalDateTime.now(), LocalDateTime.now(), enderecos, "1000");
 
         assertEquals(1L, clienteDTO.getId());
         assertEquals("Anderson", clienteDTO.getNomeCliente());

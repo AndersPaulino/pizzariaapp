@@ -23,7 +23,6 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/**").permitAll()
                         //.anyRequest().authenticated()
                 );
