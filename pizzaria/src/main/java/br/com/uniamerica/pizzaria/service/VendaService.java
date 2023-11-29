@@ -80,11 +80,10 @@ public class VendaService {
                 .orElseThrow(()-> new IllegalArgumentException("Venda não econtrada com o ID: " + id));
         vendaRepository.delete(venda);
     }
-    public void desativar(Long id){
-        Optional<Venda> vendaOptional = vendaRepository.findById(id);
-        Venda venda = vendaOptional.get();
-
-        if (vendaOptional.isPresent()){
+    public void desativar(Long id) {
+        // Verifica se a venda existe antes de tentar acessar
+        if (vendaRepository.existsById(id)) {
+            Venda venda = vendaRepository.findById(id).orElse(null);
             venda.setAtivo(false);
             vendaRepository.save(venda);
             throw new IllegalArgumentException("Venda desativada com sucesso!");

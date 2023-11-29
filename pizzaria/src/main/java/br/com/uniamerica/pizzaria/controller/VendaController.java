@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vendas")
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/venda")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class VendaController {
 
     private VendaService vendaService;
@@ -83,6 +83,9 @@ public class VendaController {
     @PostMapping
     public ResponseEntity<String> cadastrar(@RequestBody Venda venda){
         try {
+            if (venda == null) {
+                return ResponseEntity.badRequest().body("O objeto produto está ausente ou vazio.");
+            }
             vendaService.cadastrar(venda);
             return ResponseEntity.ok().body("Registro cadastrado com sucesso!");
         }catch (IllegalArgumentException e){
