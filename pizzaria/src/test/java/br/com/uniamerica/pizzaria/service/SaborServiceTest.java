@@ -103,10 +103,13 @@ class SaborServiceTest {
     void testCadastrar() {
         Sabor sabor = new Sabor();
         when(saborRepository.save(sabor)).thenReturn(sabor);
-        SaborService saborService = new SaborService(saborRepository);
 
+        SaborService saborService = new SaborService(saborRepository);
         saborService.cadastrar(sabor);
+
+        verify(saborRepository, times(1)).save(sabor);
     }
+
     @Test
     void testAtualizar() {
         Long id = 1L;

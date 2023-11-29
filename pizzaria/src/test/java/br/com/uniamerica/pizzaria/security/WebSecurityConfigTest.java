@@ -1,6 +1,5 @@
-package br.com.uniamerica.pizzaria.entity;
+package br.com.uniamerica.pizzaria.security;
 
-import br.com.uniamerica.pizzaria.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +19,7 @@ class WebSecurityConfigTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    public void testSecurityConfiguration() throws Exception {
+    void testSecurityConfiguration() throws Exception {
         assertNotNull(auth);
     }
 }
