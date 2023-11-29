@@ -4,6 +4,7 @@ import { FuncionariolistComponent } from './funcionariolist.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
+import { Funcionario } from 'src/app/models/funcionario/funcionario';
 
 describe('FuncionariolistComponent', () => {
   let component: FuncionariolistComponent;
@@ -28,4 +29,5 @@ describe('FuncionariolistComponent', () => {
 it('TESTE 1 - Criação OK do Componente', () => {
   expect(component).toBeTruthy();
 });
+
 });
