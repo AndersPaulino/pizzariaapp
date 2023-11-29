@@ -23,6 +23,7 @@ import { SabordetailsComponent } from './components/sabor/sabordetails/sabordeta
 import { LoginComponent } from './components/login/login.component';
 import { VendalistComponent } from './components/venda/vendalist/vendalist.component';
 import { VendadetailsComponent } from './components/venda/vendadetails/vendadetails.component';
+import { IndexComponent } from './components/layout/index/index.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { VendadetailsComponent } from './components/venda/vendadetails/vendadeta
     FuncionariolistComponent,
     FuncionariodetailsComponent,
     HeaderComponent,
+    IndexComponent,
     FooterComponent,
     MenuComponent,
     PizzalistComponent,
