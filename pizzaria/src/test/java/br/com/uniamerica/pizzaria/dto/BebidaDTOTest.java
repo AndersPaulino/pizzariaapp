@@ -31,10 +31,11 @@ class BebidaDTOTest {
 
     @Test
     void testeConstructorWithIndividualsParameters(){
-        bebidaDTO = new BebidaDTO(1L, true, "COCA", LocalDateTime.now(), LocalDateTime.now(), BigDecimal.valueOf(10));
+        bebidaDTO = new BebidaDTO(1L, true, "COCA", BigDecimal.valueOf(5),LocalDateTime.now(), LocalDateTime.now());
 
         assertEquals(1L, bebidaDTO.getId());
         assertEquals("COCA", bebidaDTO.getNomeBebida());
+        assertEquals(BigDecimal.valueOf(5), bebidaDTO.getValorBebida());
         assertEquals(true, bebidaDTO.isAtivo());
     }
 }

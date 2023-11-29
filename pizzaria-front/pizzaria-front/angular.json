@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pizzaria-front:build:production"
+              "buildTarget": "pizzaria-front:build:production"
             },
             "development": {
-              "browserTarget": "pizzaria-front:build:development"
+              "buildTarget": "pizzaria-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pizzaria-front:build"
+            "buildTarget": "pizzaria-front:build"
           }
         },
         "test": {
