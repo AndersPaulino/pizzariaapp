@@ -224,7 +224,6 @@ class BebidaServiceTest {
         // Simulando a existência da bebida com o ID fornecido
         when(bebidaRepository.findById(id)).thenReturn(Optional.of(bebida));
 
-        // Chamando o método de desativar
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             bebidaService.desativar(id);
         });
