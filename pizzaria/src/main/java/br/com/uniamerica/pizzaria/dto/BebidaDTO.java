@@ -4,6 +4,7 @@ import br.com.uniamerica.pizzaria.entity.Bebida;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -11,6 +12,7 @@ public class BebidaDTO {
     private Long id;
     private boolean ativo;
     private String nomeBebida;
+    private BigDecimal valorBebida;
     private LocalDateTime registro;
     private LocalDateTime atualizar;
 
@@ -18,13 +20,15 @@ public class BebidaDTO {
         id = bebida.getId();
         ativo = bebida.isAtivo();
         nomeBebida = bebida.getNomeBebida();
+        valorBebida = bebida.getValorBebida();
         registro = bebida.getRegistro();
         atualizar = bebida.getAtualizar();
     }
-    public BebidaDTO(Long id, boolean ativo, String nomeBebida, LocalDateTime registro, LocalDateTime atualizar){
+    public BebidaDTO(Long id, boolean ativo, String nomeBebida, BigDecimal valorBebida,LocalDateTime registro, LocalDateTime atualizar){
         this.id = id;
         this.ativo = ativo;
         this.nomeBebida = nomeBebida;
+        this.valorBebida = valorBebida;
         this.registro = registro;
         this.atualizar = atualizar;
     }

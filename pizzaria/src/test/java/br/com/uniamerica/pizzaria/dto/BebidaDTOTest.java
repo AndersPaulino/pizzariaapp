@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,10 +31,11 @@ class BebidaDTOTest {
 
     @Test
     void testeConstructorWithIndividualsParameters(){
-        bebidaDTO = new BebidaDTO(1L, true, "COCA", LocalDateTime.now(), LocalDateTime.now());
+        bebidaDTO = new BebidaDTO(1L, true, "COCA", BigDecimal.valueOf(5),LocalDateTime.now(), LocalDateTime.now());
 
         assertEquals(1L, bebidaDTO.getId());
         assertEquals("COCA", bebidaDTO.getNomeBebida());
+        assertEquals(BigDecimal.valueOf(5), bebidaDTO.getValorBebida());
         assertEquals(true, bebidaDTO.isAtivo());
     }
 }
