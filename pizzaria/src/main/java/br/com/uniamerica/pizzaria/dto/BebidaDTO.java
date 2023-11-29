@@ -15,6 +15,7 @@ public class BebidaDTO {
     private BigDecimal valorBebida;
     private LocalDateTime registro;
     private LocalDateTime atualizar;
+    private BigDecimal valorBebida;
 
     public BebidaDTO(Bebida bebida){
         id = bebida.getId();
@@ -23,7 +24,8 @@ public class BebidaDTO {
         valorBebida = bebida.getValorBebida();
         registro = bebida.getRegistro();
         atualizar = bebida.getAtualizar();
-    }
+        valorBebida = bebida.getValorBebida();
+
     public BebidaDTO(Long id, boolean ativo, String nomeBebida, BigDecimal valorBebida,LocalDateTime registro, LocalDateTime atualizar){
         this.id = id;
         this.ativo = ativo;
@@ -31,5 +33,6 @@ public class BebidaDTO {
         this.valorBebida = valorBebida;
         this.registro = registro;
         this.atualizar = atualizar;
+        this.valorBebida = valorBebida;
     }
 }
