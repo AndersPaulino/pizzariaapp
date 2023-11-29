@@ -1,1 +1,15 @@
-<p>enderecodetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="exampleInputText1" class="form-label">Bairro:</label>
+        <input type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp" [(ngModel)]="endereco.bairro">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputText2" class="form-label">Rua:</label>
+        <input type="text" class="form-control" name="exampleInputText2" aria-describedby="emailHelp" [(ngModel)]="endereco.rua">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Numero:</label>
+        <input type="number" class="form-control" name="exampleInputPassword1" [(ngModel)]="endereco.numero">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
