@@ -9,4 +9,8 @@ export class Pizza {
     valorPizza!: number;
     registro!: Date;
     atualizar!: Date;
+
+    constructor() {
+        this.sabor = [];
+    }
 }

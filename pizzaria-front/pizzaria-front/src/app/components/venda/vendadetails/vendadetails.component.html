@@ -1,1 +1,143 @@
-<p>vendadetails works!</p>
+<form (ngSubmit)="salvar()">
+    <button type="button" class="btn btn-primary" (click)="lancar(modal1)">Lançar Cliente</button>
+    <button type="button" class="btn btn-primary" (click)="lancar(modal2)">Lançar Funcionario</button>
+    <button type="button" class="btn btn-primary" (click)="lancar(modal3)">Lançar Pizza</button>
+    <button type="button" class="btn btn-primary" (click)="lancar(modal4)">Lançar Bebida</button>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Funcionario</th>
+                    <th scope="col">Pizzas</th>
+                    <th scope="col">Bebidas</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col">Registro</th>
+                    <th scope="col">Atualizar</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ venda.id }}</td>
+                    <td>{{ venda.cliente.nomeCliente }}</td>
+                    <td>{{ venda.funcionario.nomeFuncionario }}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let pizza of venda.pizzas">{{ pizza.sabor }}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let bebida of venda.bebidas">{{ bebida.nomeBebida }}</li>
+                        </ul>
+                    </td>
+                    <td>{{ venda.ativo }}</td>
+                    <td>{{ venda.registro }}</td>
+                    <td>{{ venda.atualizar }}</td>
+                    <td>
+                        <button button type="button" class="btn btn-danger" (click)="excluirVenda(venda, 0)">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+</form>
+
+<ng-template #modal1 let-modal>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cliente Modal</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="salvar()">
+            <div class="row">
+              <div class="col-lg-12">
+                <app-clientelist [modoLancamento]="true" (retorno)="retornoClienteList($event)"></app-clientelist>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modal2 let-modal>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Funcionario Modal</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="salvar()">
+            <div class="row">
+              <div class="col-lg-12">
+                <app-funcionariolist [modoLancamento]="true" (retorno)="retornoFuncionarioList($event)"></app-funcionariolist>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modal3 let-modal>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Pizza Modal</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="salvar()">
+            <div class="row">
+              <div class="col-lg-12">
+                <app-pizzalist [modoLancamento]="true" (retorno)="retornoPizzaList($event)"></app-pizzalist>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modal4 let-modal>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Bebida Modal</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="salvar()">
+            <div class="row">
+              <div class="col-lg-12">
+                <app-bebidas-list [modoLancamento]="true" (retorno)="retornoBebidaList($event)"></app-bebidas-list>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>

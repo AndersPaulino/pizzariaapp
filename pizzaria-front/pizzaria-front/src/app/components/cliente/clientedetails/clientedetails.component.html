@@ -1,1 +1,53 @@
-<p>clientedetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="exampleInputText1" class="form-label">Nome:</label>
+        <input type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp" [(ngModel)]="cliente.nomeCliente">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputText2" class="form-label">CPF:</label>
+        <input type="text" class="form-control" name="exampleInputText2" aria-describedby="emailHelp" [(ngModel)]="cliente.cpf">
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="lancar(modal1)">Lançar Endereço</button> 
+
+    <div class="table-responsive"> <!-- Adicione esta div para tornar a tabela responsiva -->
+        <table class="table table-striped table-sm"> <!-- Use a classe table-sm para tornar a tabela menor, se necessário -->
+            <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Rua</th>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let endereco of cliente.endereco; let i = index">
+                    <th scope="row">{{ endereco.id }}</th>
+                    <td> {{ endereco.bairro }} </td>
+                    <td> {{ endereco.rua }} </td>
+                    <td> {{ endereco.numero }} </td>
+                    <td> <button type="button" class="btn btn-primary" (click)="excluir(endereco,i)">Excluir</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<ng-template #modal1 let-modal>
+    <div class="modal-dialog modal-lg"> <!-- Ajuste o tamanho da modal usando modal-lg -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalhes Cliente</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <app-enderecolist [modoLancamento]="true" (retorno)="retornoEnderecoList($event)"></app-enderecolist>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

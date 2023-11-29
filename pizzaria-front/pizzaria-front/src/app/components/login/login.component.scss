@@ -1,0 +1,67 @@
+.section {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #020300;
+}
+
+.nome_pizzaria {
+    text-align: center;
+    color: #F4F4F4;
+    font-size: 2em;
+    animation: brilho 3s infinite alternate; // Adicionando animação de brilho
+}
+
+.tagline {
+    font-size: 1.5em;
+    color: #F4F4F4;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: brilho 3s infinite alternate; // Adicionando animação de brilho
+}
+
+@keyframes brilho {
+    0% {
+        color: #F4F4F4;
+        text-shadow: 0 0 10px #F4F4F4; // Adicionando sombra ao texto
+    }
+    100% {
+        color: #FFD700; // Cor do brilho (amarelo dourado)
+        text-shadow: 0 0 20px #FFD700; // Aumentando o tamanho da sombra para um efeito mais pronunciado
+    }
+}
+
+.login-form {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+    color: #1F01B9; // Dark Blue
+}
+
+.login-form input {
+    border: 1px solid #1F01B9; // Dark Blue
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.login-form button {
+    background-color: #F24333; // Vermilion
+    color: #FFFFFF; // White
+    border: none;
+    border-radius: 4px;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form button:hover {
+    background-color: darken(#F24333, 10%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

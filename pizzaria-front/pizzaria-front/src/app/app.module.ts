@@ -21,7 +21,7 @@ import { PizzadetailsComponent } from './components/pizza/pizzadetails/pizzadeta
 import { SaborlistComponent } from './components/sabor/saborlist/saborlist.component';
 import { SabordetailsComponent } from './components/sabor/sabordetails/sabordetails.component';
 import { LoginComponent } from './components/login/login.component';
-import { VendalistComponent } from './components/venda/vendalist/vendalist.component';
+import { VendaListComponent } from './components/venda/vendalist/vendalist.component';
 import { VendadetailsComponent } from './components/venda/vendadetails/vendadetails.component';
 import { IndexComponent } from './components/layout/index/index.component';
 
@@ -45,7 +45,7 @@ import { IndexComponent } from './components/layout/index/index.component';
     SaborlistComponent,
     SabordetailsComponent,
     LoginComponent,
-    VendalistComponent,
+    VendaListComponent,
     VendadetailsComponent
   ],
   imports: [

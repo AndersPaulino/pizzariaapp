@@ -23,8 +23,8 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(auth -> auth
-                       .anyRequest().authenticated()
+                                .requestMatchers("/**").permitAll()
+                        //.anyRequest().authenticated()
                 );
         http.httpBasic(Customizer.withDefaults());
         return http.build();
