@@ -101,4 +101,36 @@ class FuncionarioServiceTest {
 
         verify(funcionarioRepository, times(1)).delete(funcionario);
     }
+    @Test
+    void testCadastrar() {
+        funcionarioRepository = mock(FuncionarioRepository.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository);
+
+        Funcionario funcionario = new Funcionario();
+        assertDoesNotThrow(() -> funcionarioService.cadastrar(funcionario));
+
+        verify(funcionarioRepository, times(1)).save(funcionario);
+    }
+
+    @Test
+    void testAtualizarFuncionario() {
+        funcionarioRepository = mock(FuncionarioRepository.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository);
+
+        Long id = 1L;
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNomeFuncionario("Novo Nome");
+
+        Funcionario funcionarioExistente = new Funcionario();
+        funcionarioExistente.setNomeFuncionario("Nome Antigo");
+
+        when(funcionarioRepository.findById(id)).thenReturn(Optional.of(funcionarioExistente));
+        when(funcionarioRepository.save(funcionarioExistente)).thenReturn(funcionarioExistente);
+
+        Funcionario result = funcionarioService.atualizarFuncionario(id, funcionario);
+        assertEquals(funcionario.getNomeFuncionario(), result.getNomeFuncionario());
+
+        verify(funcionarioRepository, times(1)).findById(id);
+        verify(funcionarioRepository, times(1)).save(funcionarioExistente);
+    }
 }

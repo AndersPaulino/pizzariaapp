@@ -8,12 +8,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -47,5 +49,38 @@ class UserServiceTest {
 
         assertNotNull(createdUserDTO);
         // Adicione aqui testes para garantir a criação correta do usuário e a conversão para UserDTO
+    }
+    @Test
+    void testLoadUserByUsername_UserFound() {
+        // Simulação de um usuário existente
+        User user = new User();
+        user.setUsername("test_user");
+        user.setPassword("password"); // Defina a senha do usuário
+
+        // Simulando o comportamento do UserRepository
+        when(userRepository.findByUsername("test_user")).thenReturn(user);
+
+        // Chamando o método do serviço
+        UserDetails userDetails = userService.loadUserByUsername("test_user");
+
+        assertNotNull(userDetails);
+        assertEquals(user.getUsername(), userDetails.getUsername());
+        // Adicione outras verificações conforme necessário
+    }
+
+    @Test
+    void testLoadUserByUsername_EmptyPassword() {
+        // Simulação de um usuário com senha vazia
+        User user = new User();
+        user.setUsername("user_with_empty_password");
+        user.setPassword(""); // Defina a senha vazia do usuário
+
+        // Simulando o comportamento do UserRepository
+        when(userRepository.findByUsername("user_with_empty_password")).thenReturn(user);
+
+        // Chamando o método do serviço para um usuário com senha vazia
+        assertThrows(UsernameNotFoundException.class, () -> {
+            userService.loadUserByUsername("user_with_empty_password");
+        });
     }
 }

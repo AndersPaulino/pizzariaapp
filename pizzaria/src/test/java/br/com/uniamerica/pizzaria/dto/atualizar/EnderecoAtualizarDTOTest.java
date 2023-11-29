@@ -44,10 +44,11 @@ class EnderecoAtualizarDTOTest {
         LocalDateTime atualizar = LocalDateTime.now();
 
         // Criando um objeto EnderecoAtualizarDTO utilizando o construtor com parâmetros
-        enderecoDTO = new EnderecoAtualizarDTO(id, bairro, rua, numero, atualizar);
+        enderecoDTO = new EnderecoAtualizarDTO(id, true, bairro, rua, numero, atualizar);
 
         // Verificando se os valores foram atribuídos corretamente
         assertThat(enderecoDTO.getId()).isEqualTo(id);
+        assertThat(enderecoDTO.isAtivo());
         assertThat(enderecoDTO.getBairro()).isEqualTo(bairro);
         assertThat(enderecoDTO.getRua()).isEqualTo(rua);
         assertThat(enderecoDTO.getNumero()).isEqualTo(numero);
