@@ -20,7 +20,7 @@ public class Cliente extends AbsctractEntity{
     private String cpf;
 
     @Getter @Setter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "cliente_endereco",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "endereco_id"))

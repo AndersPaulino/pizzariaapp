@@ -4,6 +4,7 @@ import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.dto.atualizar.ClienteAtualizarDTO;
 import br.com.uniamerica.pizzaria.dto.cadastro.ClienteCadastroDTO;
 import br.com.uniamerica.pizzaria.entity.Cliente;
+import br.com.uniamerica.pizzaria.entity.Endereco;
 import br.com.uniamerica.pizzaria.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -115,6 +116,21 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<String> cadastrarCliente(@RequestBody Cliente cliente) {
         try {
+            // Verifique se o cliente é nulo
+            if (cliente == null) {
+                return ResponseEntity.badRequest().body("O objeto cliente está ausente ou vazio.");
+            }
+
+            // Verifique se o nome do cliente é fornecido
+            if (cliente.getNomeCliente() == null || cliente.getNomeCliente().isEmpty()) {
+                return ResponseEntity.badRequest().body("O nome do cliente não pode estar vazio.");
+            }
+
+            // Verifique se a lista de endereços está presente e não vazia
+            List<Endereco> enderecos = cliente.getEndereco();
+            if (enderecos == null || enderecos.isEmpty()) {
+                return ResponseEntity.badRequest().body("O cliente deve ter pelo menos um endereço.");
+            }
             clienteService.cadastrar(cliente);
             return ResponseEntity.ok().body("Registro cadastrado com sucesso!");
         } catch (IllegalArgumentException e) {

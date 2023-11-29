@@ -13,24 +13,24 @@ public class Venda extends AbsctractEntity{
 
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @Getter @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
     @Getter @Setter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "venda_pizza",
             joinColumns = @JoinColumn(name = "venda_id"),
             inverseJoinColumns = @JoinColumn(name = "pizza_id"))
     private List<Pizza> pizzas = new ArrayList<>();
 
     @Getter @Setter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "venda_bebida",
             joinColumns = @JoinColumn(name = "venda_id"),
             inverseJoinColumns = @JoinColumn(name = "bebida_id"))
