@@ -5,7 +5,11 @@ export class Cliente {
     ativo!: boolean;
     nomeCliente!: string;
     cpf!: string;
-    endereco!: Endereco;
+    endereco!: Endereco[];
     registro!: Date;
     atualizar!: Date;
+
+    constructor() {
+        this.endereco = [];
+    }
 }
