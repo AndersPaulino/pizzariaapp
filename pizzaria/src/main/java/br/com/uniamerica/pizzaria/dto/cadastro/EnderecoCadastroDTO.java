@@ -17,13 +17,15 @@ public class EnderecoCadastroDTO {
 
     public EnderecoCadastroDTO(Endereco endereco){
         id = endereco.getId();
+        ativo = endereco.isAtivo();
         bairro = endereco.getBairro();
         rua = endereco.getRua();
         numero = endereco.getNumero();
         registro = endereco.getRegistro();
     }
-    public EnderecoCadastroDTO(Long id, String bairro, String rua, int numero, LocalDateTime registro){
+    public EnderecoCadastroDTO(Long id, boolean ativo, String bairro, String rua, int numero, LocalDateTime registro){
         this.id = id;
+        this.ativo = ativo;
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;

@@ -44,10 +44,11 @@ class EnderecoCadastroDTOTest {
         LocalDateTime registro = LocalDateTime.now();
 
         // Criando um objeto EnderecoCadastroDTO utilizando o construtor com parâmetros
-        enderecoDTO = new EnderecoCadastroDTO(id, bairro, rua, numero, registro);
+        enderecoDTO = new EnderecoCadastroDTO(id, true, bairro, rua, numero, registro);
 
         // Verificando se os valores foram atribuídos corretamente
         assertThat(enderecoDTO.getId()).isEqualTo(id);
+        assertThat(enderecoDTO.isAtivo());
         assertThat(enderecoDTO.getBairro()).isEqualTo(bairro);
         assertThat(enderecoDTO.getRua()).isEqualTo(rua);
         assertThat(enderecoDTO.getNumero()).isEqualTo(numero);
