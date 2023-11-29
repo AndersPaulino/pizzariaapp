@@ -13,4 +13,11 @@ export class Venda {
     emitirNota!: boolean;
     entregar!: boolean;
     valorVenda!: number;
+    registro!: Date;
+    atualizar!: Date;
+
+    constructor() {
+        this.pizzas = [];
+        this.bebidas = [];
+    }
 }

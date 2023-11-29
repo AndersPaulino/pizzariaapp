@@ -8,6 +8,7 @@ import { SaborlistComponent } from './components/sabor/saborlist/saborlist.compo
 import { FuncionariolistComponent } from './components/funcionario/funcionariolist/funcionariolist.component';
 import { ClientelistComponent } from './components/cliente/clientelist/clientelist.component';
 import { PizzalistComponent } from './components/pizza/pizzalist/pizzalist.component';
+import { VendaListComponent } from './components/venda/vendalist/vendalist.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: "sabor", component: SaborlistComponent },
       { path: "funcionario", component:FuncionariolistComponent },
       { path: "cliente", component:ClientelistComponent },
-      { path: "pizza", component:PizzalistComponent }
+      { path: "pizza", component:PizzalistComponent },
+      { path: "venda", component:VendaListComponent }
 ]}
 
 ];
