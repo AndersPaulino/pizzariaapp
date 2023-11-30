@@ -28,4 +28,25 @@ describe('LoginComponent', () => {
 it('TESTE 1 - Criação OK do Componente', () => {
   expect(component).toBeTruthy();
 });
+
+it('should display the login form', () => {
+  fixture.detectChanges();
+
+  // Verify the rendered output
+  const form = fixture.nativeElement.querySelector('form');
+  expect(form).toBeTruthy();
+  expect(form.querySelector('input').type).toBe('text');
+  expect(form.querySelector('input').required).toBeTruthy();
+  expect(form.querySelector('input').value).toBe('');
+  expect(form.querySelector('input').placeholder).toBe('Digite seu login');
+  expect(form.querySelector('button').type).toBe('submit');
+  expect(form.querySelector('button').disabled).toBe(false);
+});
+
+it('should call the logar method on form submit', () => {
+  spyOn(component, 'logar');
+  const form = fixture.nativeElement.querySelector('form');
+  form.dispatchEvent(new Event('submit'));
+  expect(component.logar).toHaveBeenCalled();
+});
 });

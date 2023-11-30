@@ -32,7 +32,6 @@ describe('HeaderComponent', () => {
   it('deve conter links de navegação para rotas corretas', () => {
     const linksDeNavegacao = fixture.debugElement.queryAll(By.css('.navbar-nav .nav-link'));
 
-    // Substitua as rotas abaixo pelos caminhos reais do seu aplicativo
     const rotasEsperadas = [
       '/admin/bebida',
       '/admin/sabor',

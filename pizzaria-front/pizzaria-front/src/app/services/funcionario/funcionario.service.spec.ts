@@ -1,29 +1,37 @@
-import { TestBed,ComponentFixture } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FuncionarioService } from './funcionario.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Funcionario } from 'src/app/models/funcionario/funcionario';
 
 describe('FuncionarioService', () => {
-    let component: FuncionarioService;
-    let fixture: ComponentFixture<FuncionarioService>;
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        declarations: [FuncionarioService],
-        imports: [HttpClientTestingModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      });
-      fixture = TestBed.createComponent(FuncionarioService);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+  let service: FuncionarioService;
+  let httpMock: HttpTestingController;
 
-  it('should be created', () => {
-    expect(FuncionarioService).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [FuncionarioService]
+    });
+    service = TestBed.inject(FuncionarioService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-    //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return an Observable<Funcionario[]>', () => {
+    const mockFuncionarios: Funcionario[] = [];
+    service.listAll().subscribe(funcionarios => {
+      expect(funcionarios).toEqual(mockFuncionarios);
+    });
+
+    const req = httpMock.expectOne('http://localhost:9090/api/funcionario');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockFuncionarios);
   });
 });

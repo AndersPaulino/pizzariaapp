@@ -1,29 +1,37 @@
-import { TestBed,ComponentFixture } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SaborService } from './sabor.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Sabor } from 'src/app/models/sabor/sabor';
 
 describe('SaborService', () => {
-    let component: SaborService;
-    let fixture: ComponentFixture<SaborService>;
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        declarations: [SaborService],
-        imports: [HttpClientTestingModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      });
-      fixture = TestBed.createComponent(SaborService);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+  let service: SaborService;
+  let httpMock: HttpTestingController;
 
-  it('should be created', () => {
-    expect(SaborService).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [SaborService]
+    });
+    service = TestBed.inject(SaborService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-    //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return an Observable<Sabor[]>', () => {
+    const mockSabores: Sabor[] = [];
+    service.listAll().subscribe(sabores => {
+      expect(sabores).toEqual(mockSabores);
+    });
+
+    const req = httpMock.expectOne('http://localhost:9090/api/sabor');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockSabores);
   });
 });

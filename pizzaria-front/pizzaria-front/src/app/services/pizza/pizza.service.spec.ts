@@ -1,29 +1,37 @@
-import { TestBed,ComponentFixture } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PizzaService } from './pizza.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Pizza } from 'src/app/models/pizza/pizza';
 
 describe('PizzaService', () => {
-    let component: PizzaService;
-    let fixture: ComponentFixture<PizzaService>;
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        declarations: [PizzaService],
-        imports: [HttpClientTestingModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      });
-      fixture = TestBed.createComponent(PizzaService);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+  let service: PizzaService;
+  let httpMock: HttpTestingController;
 
-  it('should be created', () => {
-    expect(PizzaService).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [PizzaService]
+    });
+    service = TestBed.inject(PizzaService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-    //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return an Observable<Pizza[]>', () => {
+    const mockPizzas: Pizza[] = [];
+    service.listAll().subscribe(pizzas => {
+      expect(pizzas).toEqual(mockPizzas);
+    });
+
+    const req = httpMock.expectOne('http://localhost:9090/api/pizza');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockPizzas);
   });
 });
