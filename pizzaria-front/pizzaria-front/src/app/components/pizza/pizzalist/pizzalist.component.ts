@@ -10,6 +10,7 @@ import { PizzaService } from 'src/app/services/pizza/pizza.service';
 export class PizzalistComponent {
 
   lista: Pizza[] = [];
+  mensagemErro: string | undefined;
 
   pizzaSelecionadoParaEdicao: Pizza = new Pizza();
   indiceSelecionadoParaEdicao!: number;

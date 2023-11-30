@@ -5,6 +5,7 @@ import { Bebida } from 'src/app/models/bebida/bebida';
 import { BebidaService } from 'src/app/services/bebida/bebida.service';
 import { inject } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
 
 describe('BebidaDetailsComponent', () => {
   let component: BebidaDetailsComponent;
@@ -75,8 +76,7 @@ describe('BebidaDetailsComponent', () => {
     // Check if the input fields are correctly bound
     expect(nomeInput.value).toEqual(mockBebida.nomeBebida);
     expect(parseFloat(valorInput.value)).toEqual(mockBebida.valorBebida);
-}));
-
+  }));
 
   it('should update the component property on input changes', waitForAsync(() => {
     const compiled = fixture.debugElement.nativeElement;
@@ -158,5 +158,20 @@ describe('BebidaDetailsComponent', () => {
     // Expectations: The emit should be called with the updated bebida
     expect(component.retorno.emit).toHaveBeenCalledWith(updatedBebida);
   });
+
+  it('should handle listAll success', fakeAsync(() => {
+    const bebidaList: Bebida[] = [new Bebida()];
+    spyOn(bebidaService, 'listAll').and.returnValue(of(bebidaList));
+    tick();
   
+    expect(component.bebida).toEqual(bebidaList[0]);
+  }));
+  
+  
+  it('should handle listAll error', fakeAsync(() => {
+    spyOn(bebidaService, 'listAll').and.returnValue(throwError('Erro ao buscar bebidas'));
+    tick();
+  
+    expect(component.bebida).toBeUndefined();
+  }));
 });

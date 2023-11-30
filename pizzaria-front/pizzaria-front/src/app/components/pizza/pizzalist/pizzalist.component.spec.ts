@@ -130,6 +130,97 @@ describe('PizzalistComponent', () => {
     expect(component.retorno.emit).toHaveBeenCalledWith(pizza);
   });
 
-  // Adicione mais testes conforme necessário para cobrir diferentes cenários.
+  it('should handle addOuEditarPizza for updating', fakeAsync(() => {
+    const pizza: Pizza = {
+      id: 1,
+      ativo: true,
+      sabor: [
+        { id: 1, ativo: true, nomeSabor: 'Sabor 1', registro: new Date(), atualizar: new Date() },
+        { id: 2, ativo: false, nomeSabor: 'Sabor 2', registro: new Date(), atualizar: new Date() },
+      ],
+      tamanho: 'M',
+      qtdeSabor: 2,
+      valorPizza: 20.0,
+      registro: new Date(),
+      atualizar: new Date(),
+    };
+    const mensagemSucesso = 'Atualização bem-sucedida';
+    spyOn(pizzaService, 'atualizarPizza').and.returnValue(of(mensagemSucesso));
+
+    component.addOuEditarPizza(pizza);
+    tick();
+
+    expect(component.lista).toContain(pizza);
+  }));
+
+  it('should handle addOuEditarPizza for creating', fakeAsync(() => {
+    const pizza: Pizza = {
+      id:1,
+      ativo: true,
+      sabor: [
+        { id: 1, ativo: true, nomeSabor: 'Sabor 1', registro: new Date(), atualizar: new Date() },
+        { id: 2, ativo: false, nomeSabor: 'Sabor 2', registro: new Date(), atualizar: new Date() },
+      ],
+      tamanho: 'M',
+      qtdeSabor: 2,
+      valorPizza: 20.0,
+      registro: new Date(),
+      atualizar: new Date(),
+    };
+    const mensagemSucesso = 'Cadastro bem-sucedido';
+    spyOn(pizzaService, 'cadastrarPizza').and.returnValue(of(mensagemSucesso));
+
+    component.addOuEditarPizza(pizza);
+    tick();
+
+    expect(component.lista).toContain(pizza);
+  }));
+
+  it('should call listAll after addOuEditarPizza', fakeAsync(() => {
+    const pizza: Pizza = {
+      id: 1,
+      ativo: true,
+      sabor: [
+        { id: 1, ativo: true, nomeSabor: 'Sabor 1', registro: new Date(), atualizar: new Date() },
+        { id: 2, ativo: false, nomeSabor: 'Sabor 2', registro: new Date(), atualizar: new Date() },
+      ],
+      tamanho: 'M',
+      qtdeSabor: 2,
+      valorPizza: 20.0,
+      registro: new Date(),
+      atualizar: new Date(),
+    };
+    spyOn(pizzaService, 'cadastrarPizza').and.returnValue(of('Cadastro bem-sucedido'));
+
+    component.addOuEditarPizza(pizza);
+    tick();
+
+    expect(component.listAll).toHaveBeenCalled();
+  }));
+
+  it('should call listAll after addOuEditarPizza for updating', fakeAsync(() => {
+    const pizza: Pizza = {
+      id: 1,
+      ativo: true,
+      sabor: [
+        { id: 1, ativo: true, nomeSabor: 'Sabor 1', registro: new Date(), atualizar: new Date() },
+        { id: 2, ativo: false, nomeSabor: 'Sabor 2', registro: new Date(), atualizar: new Date() },
+      ],
+      tamanho: 'M',
+      qtdeSabor: 2,
+      valorPizza: 20.0,
+      registro: new Date(),
+      atualizar: new Date(),
+    };
+    spyOn(pizzaService, 'atualizarPizza').and.returnValue(of('Atualização bem-sucedida'));
+    component.pizzaSelecionadoParaEdicao.id = 1;
+
+    component.addOuEditarPizza(component.pizzaSelecionadoParaEdicao);
+    tick();
+
+    expect(component.listAll).toHaveBeenCalled();
+  }));
+
+  
 
 });

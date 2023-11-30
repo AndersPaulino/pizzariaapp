@@ -10,6 +10,7 @@ import { EnderecoService } from 'src/app/services/endereco/endereco.service';
 })
 export class EnderecolistComponent implements OnInit{
   lista: Endereco[] = [];
+  mensagemErro: string | undefined;
 
   @Output() retorno = new EventEmitter<Endereco>();
   @Input() modoLancamento: boolean = false;

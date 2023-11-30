@@ -101,4 +101,50 @@ describe('FuncionariolistComponent', () => {
     tick();
 
   }));
+
+  it('should handle addOuEditarFuncionario for updating', fakeAsync(() => {
+    const funcionario = { id: 1, nomeFuncionario: 'Funcionário 1', ativo: true, registro: new Date(), atualizar: new Date() };
+    const mensagemSucesso = 'Atualização bem-sucedida';
+    spyOn(funcionarioService, 'atualizarFuncionario').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarFuncionario(funcionario);
+    tick();
+  
+    expect(component.lista).toContain(funcionario);
+  }));
+  
+  it('should handle addOuEditarFuncionario for creating', fakeAsync(() => {
+    const funcionario = { id: 1, nomeFuncionario: 'Funcionário 1', ativo: true, registro: new Date(), atualizar: new Date() };
+    const mensagemSucesso = 'Cadastro bem-sucedido';
+    spyOn(funcionarioService, 'cadastrarFuncionario').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarFuncionario(funcionario);
+    tick();
+  
+    expect(component.lista).toContain(funcionario);
+  }));
+  
+  it('should call listAll and dismiss modal after addOuEditarFuncionario', fakeAsync(() => {
+    const funcionario = { id: 1, nomeFuncionario: 'Funcionário 1', ativo: true, registro: new Date(), atualizar: new Date() };
+    spyOn(funcionarioService, 'cadastrarFuncionario').and.returnValue(of('Cadastro bem-sucedido'));
+  
+    component.addOuEditarFuncionario(funcionario);
+    tick();
+  
+    expect(component.listAll).toHaveBeenCalled();
+    expect(modalService.dismissAll).toHaveBeenCalled();
+  }));
+  
+  it('should call listAll and dismiss modal after addOuEditarFuncionario for updating', fakeAsync(() => {
+    const funcionario = { id: 1, nomeFuncionario: 'Funcionário 1', ativo: true, registro: new Date(), atualizar: new Date() };
+    spyOn(funcionarioService, 'atualizarFuncionario').and.returnValue(of('Atualização bem-sucedida'));
+    component.funcionarioSelecionadoParaEdicao.id = 1;
+  
+    component.addOuEditarFuncionario(component.funcionarioSelecionadoParaEdicao);
+    tick();
+  
+    expect(component.listAll).toHaveBeenCalled();
+    expect(modalService.dismissAll).toHaveBeenCalled();
+  }));
+  
 });

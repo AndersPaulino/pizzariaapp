@@ -56,4 +56,59 @@ describe('ClientelistComponent', () => {
 
     expect(component.lista).toEqual([]);
   }));
+
+  it('should handle deletar success', fakeAsync(() => {
+    const clientes = [
+      { id: 1, ativo: true, nomeCliente: 'Cliente 1', cpf: '123456789', endereco: [], registro: new Date(), atualizar: new Date() },
+      { id: 2, ativo: true, nomeCliente: 'Cliente 2', cpf: '987654321', endereco: [], registro: new Date(), atualizar: new Date() },
+    ];
+
+    // Simula a exclusão bem-sucedida
+    spyOn(clienteService, 'deletarCliente').and.returnValue(of('Exclusão bem-sucedida'));
+
+    // Simula a listagem de clientes após a exclusão
+    spyOn(clienteService, 'listAll').and.returnValue(of(clientes));
+
+    component.deletar(1);
+    tick();
+
+    // Verifica se a lista foi atualizada corretamente
+    expect(component.lista).toEqual(clientes);
+
+    // Verifica se a mensagem de erro está indefinida em caso de sucesso.
+    expect(component.mensagemErro).toBeUndefined();
+}));
+
+
+  it('should handle deletar error', fakeAsync(() => {
+    spyOn(clienteService, 'deletarCliente').and.returnValue(throwError('Erro ao deletar cliente'));
+
+    component.deletar(1);
+    tick();
+
+    expect(component.lista).toEqual([]);
+    expect(component.mensagemErro).toEqual('Erro ao deletar cliente'); // Verificando se a mensagem de erro foi definida corretamente em caso de falha.
+  }));
+
+  it('should handle addOuEditarCliente for updating', fakeAsync(() => {
+    const cliente = { id: 1, ativo: true, nomeCliente: 'Cliente 1', cpf: '123456789', endereco: [], registro: new Date(), atualizar: new Date() };
+    spyOn(clienteService, 'atualizarCliente').and.returnValue(of('Atualização bem-sucedida'));
+
+    component.addOuEditarCliente(cliente);
+    tick();
+
+    expect(component.lista).toEqual([cliente]);
+}));
+
+it('should handle addOuEditarCliente for creating', fakeAsync(() => {
+  const cliente = { id: 1, ativo: true, nomeCliente: 'Cliente 1', cpf: '123456789', endereco: [], registro: new Date(), atualizar: new Date() };
+    spyOn(clienteService, 'cadastrarCliente').and.returnValue(of('Cadastro bem-sucedido'));
+
+    component.addOuEditarCliente(cliente);
+    tick();
+
+    expect(component.lista).toEqual([cliente]);
+}));
+
+
 });

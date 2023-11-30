@@ -77,5 +77,113 @@ describe('EnderecolistComponent', () => {
     // You can also test if the error handling logic is working as expected
   }));
 
-  // Add more tests as needed for other functions in the EnderecolistComponent class
+  it('should handle addOuEditarEndereco for updating', fakeAsync(() => {
+    const endereco = { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    const mensagemSucesso = 'Atualização bem-sucedida';
+    spyOn(enderecoService, 'atualizarEndereco').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarEndereco(endereco);
+    tick();
+  
+    expect(component.lista).toContain(endereco);
+  }));
+  
+  it('should handle addOuEditarEndereco for creating', fakeAsync(() => {
+    const endereco = { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+
+    const mensagemSucesso = 'Cadastro bem-sucedido';
+    spyOn(enderecoService, 'cadastrarEndereco').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarEndereco(endereco);
+    tick();
+  
+    expect(component.lista).toContain(endereco);
+  }));
+  
+  it('should handle deletar error', fakeAsync(() => {
+    spyOn(enderecoService, 'deletarEndereco').and.returnValue(throwError('Erro ao deletar endereço'));
+  
+    component.deletar(1);
+    tick();
+  
+    expect(component.lista).toEqual([]);
+    expect(component.mensagemErro).toBeDefined();
+  }));
+
+  it('should initialize enderecoSelecionadoParaEdicao and open modal on adicionar', () => {
+    component.adicionar({});
+  
+    expect(component.enderecoSelecionadoParaEdicao).toBeDefined();
+    expect(component.enderecoSelecionadoParaEdicao.id).toBeUndefined();
+    expect(component.modalRef).toBeDefined();
+    expect(modalService.open).toHaveBeenCalled();
+  });
+  
+  it('should update enderecoSelecionadoParaEdicao and open modal on editar', () => {
+    const endereco = { id: 1, bairro: 'Example Bairro', rua: 'Example Rua', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    const indice = 0;
+  
+    component.editar({}, endereco, indice);
+  
+    expect(component.enderecoSelecionadoParaEdicao).toEqual(endereco);
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+    expect(component.modalRef).toBeDefined();
+    expect(modalService.open).toHaveBeenCalled();
+  });
+  
+  it('should call listAll and close modal after addOuEditarEndereco', fakeAsync(() => {
+    const endereco = { id: 1, bairro: 'Example Bairro', rua: 'Example Rua', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    spyOn(enderecoService, 'cadastrarEndereco').and.returnValue(of('Cadastro bem-sucedido'));
+  
+    component.addOuEditarEndereco(endereco);
+    tick();
+  
+    expect(component.listAll).toHaveBeenCalled();
+    expect(component.modalRef.dismiss).toHaveBeenCalled();
+  }));
+  
+  it('should call listAll and close modal after addOuEditarEndereco for updating', fakeAsync(() => {
+    const endereco = { id: 1, bairro: 'Example Bairro', rua: 'Example Rua', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    spyOn(enderecoService, 'atualizarEndereco').and.returnValue(of('Atualização bem-sucedida'));
+    component.enderecoSelecionadoParaEdicao.id = 1;
+  
+    component.addOuEditarEndereco(component.enderecoSelecionadoParaEdicao);
+    tick();
+  
+    expect(component.listAll).toHaveBeenCalled();
+    expect(component.modalRef.dismiss).toHaveBeenCalled();
+  }));
+  
+  it('should handle addOuEditarEndereco for updating', fakeAsync(() => {
+    const endereco = { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    const mensagemSucesso = 'Atualização bem-sucedida';
+    spyOn(enderecoService, 'atualizarEndereco').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarEndereco(endereco);
+    tick();
+  
+    expect(component.lista).toContain(endereco);
+  }));
+  
+  it('should handle addOuEditarEndereco for creating', fakeAsync(() => {
+    const endereco = { id:1 ,bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() };
+    const mensagemSucesso = 'Cadastro bem-sucedido';
+    spyOn(enderecoService, 'cadastrarEndereco').and.returnValue(of(mensagemSucesso));
+  
+    component.addOuEditarEndereco(endereco);
+    tick();
+  
+    expect(component.lista).toContain(endereco);
+  }));
+  
+  it('should handle deletar error', fakeAsync(() => {
+    spyOn(enderecoService, 'deletarEndereco').and.returnValue(throwError('Erro ao deletar endereço'));
+  
+    component.deletar(1);
+    tick();
+  
+    expect(component.lista).toEqual([]);
+    expect(component.mensagemErro).toBeDefined();
+  }));
+  
 });

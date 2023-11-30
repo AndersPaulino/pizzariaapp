@@ -9,6 +9,7 @@ import { SaborService } from 'src/app/services/sabor/sabor.service';
 })
 export class SaborlistComponent {
   lista: Sabor[] = [];
+  mensagemErro: string | undefined;
   
   @Output() retorno = new EventEmitter<Sabor>();
   @Input() modoLancamento: boolean = false;
