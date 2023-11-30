@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.service;
 
+import br.com.uniamerica.pizzaria.dto.UserCadDTO;
 import br.com.uniamerica.pizzaria.dto.UserDTO;
 import br.com.uniamerica.pizzaria.entity.User;
 import br.com.uniamerica.pizzaria.repository.UserRepository;
@@ -10,30 +11,29 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserService implements UserDetailsService {
-
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserDTO> getAllUsers() {
+    public List<UserCadDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(UserDTO::new)
+                .map(UserCadDTO::new)
                 .toList(); // Utilizando o método toList() em vez de Collectors.toList()
     }
 
 
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserCadDTO createUser(UserCadDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
 
         User savedUser = userRepository.save(user);
-        return new UserDTO(savedUser);
+        return new UserCadDTO(savedUser);
     }
 
     @Override

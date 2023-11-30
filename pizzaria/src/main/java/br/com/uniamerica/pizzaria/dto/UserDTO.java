@@ -12,18 +12,13 @@ public class UserDTO {
     private String username;
     private String password;
     private String role;
+    private String token;
 
-    public UserDTO(User user){
-        id = user.getId();
-        username = user.getUsername();
-        password = user.getPassword();
-        role = user.getRole();
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public UserDTO(Long id, String username, String password, String role){
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    public String getToken() {
+        return token;
     }
 }

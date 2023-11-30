@@ -1,6 +1,6 @@
 package br.com.uniamerica.pizzaria.controller;
 
-import br.com.uniamerica.pizzaria.dto.UserDTO;
+import br.com.uniamerica.pizzaria.dto.UserCadDTO;
 import br.com.uniamerica.pizzaria.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -21,14 +22,14 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> users = userService.getAllUsers();
+    public ResponseEntity<List<UserCadDTO>> getAllUsers() {
+        List<UserCadDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.createUser(userDTO);
+    public ResponseEntity<UserCadDTO> createUser(@RequestBody UserCadDTO userDTO) {
+        UserCadDTO createdUser = userService.createUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 }

@@ -1,8 +1,6 @@
 package br.com.uniamerica.pizzaria.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +13,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_user",schema = "public")
-public class User extends AbsctractEntity implements UserDetails {
+public class User implements UserDetails {
+    @Id
+    @Getter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
+    private Long id;
 
     @Getter
     @Setter
