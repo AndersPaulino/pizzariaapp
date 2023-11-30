@@ -1,30 +1,46 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { VendadetailsComponent } from './vendadetails.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
+import { VendaService } from 'src/app/services/venda/venda.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('VendadetailsComponent', () => {
   let component: VendadetailsComponent;
   let fixture: ComponentFixture<VendadetailsComponent>;
+  let modalService: NgbModal;
+  let vendaService: VendaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [VendadetailsComponent],
-      imports: [HttpClientTestingModule,FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      imports: [NgbModalModule,HttpClientModule],
+      providers: [NgbModal, VendaService],
     });
+
     fixture = TestBed.createComponent(VendadetailsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    // Create a spy object for VendaService
+    const vendaServiceSpy = jasmine.createSpyObj('VendaService', ['deletarVenda']);
+
+    // Override the component's vendaService with the spy object
+    component.vendaService = vendaServiceSpy;
+
+    // Assign the spy object to the local variable for further reference
+    vendaService = TestBed.inject(VendaService) as jasmine.SpyObj<VendaService>;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-  expect(component).toBeTruthy();
-});
+  it('should call salvar method on button click', () => {
+    spyOn(component.retorno, 'emit');
+    component.salvar();
+
+    expect(component.retorno.emit).toHaveBeenCalledWith(component.venda);
+  });
+
+
+
 });

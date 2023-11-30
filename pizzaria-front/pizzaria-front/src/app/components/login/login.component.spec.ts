@@ -1,5 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
@@ -12,8 +11,8 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [HttpClientTestingModule,FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      imports: [HttpClientTestingModule, FormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -24,29 +23,57 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-  expect(component).toBeTruthy();
-});
+  it('should call the logar method on form submit', () => {
+    spyOn(component, 'logar');
+    const form = fixture.nativeElement.querySelector('form');
+    form.dispatchEvent(new Event('submit'));
+    expect(component.logar).toHaveBeenCalled();
+  });
 
-it('should display the login form', () => {
-  fixture.detectChanges();
+  it('should bind the login input value to usuario.login', waitForAsync(() => {
+    const loginInput = fixture.nativeElement.querySelector('input[name="loginInput"]');
+    const testValue = 'testLogin';
 
-  // Verify the rendered output
-  const form = fixture.nativeElement.querySelector('form');
-  expect(form).toBeTruthy();
-  expect(form.querySelector('input').type).toBe('text');
-  expect(form.querySelector('input').required).toBeTruthy();
-  expect(form.querySelector('input').value).toBe('');
-  expect(form.querySelector('input').placeholder).toBe('Digite seu login');
-  expect(form.querySelector('button').type).toBe('submit');
-  expect(form.querySelector('button').disabled).toBe(false);
-});
+    fixture.whenStable().then(() => {
+      loginInput.value = testValue;
+      loginInput.dispatchEvent(new Event('input'));
 
-it('should call the logar method on form submit', () => {
-  spyOn(component, 'logar');
-  const form = fixture.nativeElement.querySelector('form');
-  form.dispatchEvent(new Event('submit'));
-  expect(component.logar).toHaveBeenCalled();
-});
+      expect(component.usuario.login).toEqual(testValue);
+    });
+  }));
+
+  it('should bind the senha input value to usuario.senha', waitForAsync(() => {
+    const senhaInput = fixture.nativeElement.querySelector('input[name="senhaInput"]');
+    const testValue = 'testSenha';
+
+    fixture.whenStable().then(() => {
+      senhaInput.value = testValue;
+      senhaInput.dispatchEvent(new Event('input'));
+
+      expect(component.usuario.senha).toEqual(testValue);
+    });
+  }));
+
+  it('should update the view when usuario.login changes', fakeAsync(() => {
+    const loginInput = fixture.nativeElement.querySelector('input[name="loginInput"]');
+    const testValue = '';
+  
+    component.usuario.login = testValue;
+    fixture.detectChanges();
+    tick();
+  
+    expect(loginInput.value).toEqual(testValue);
+  }));
+  
+
+  it('should update the view when usuario.senha changes', fakeAsync(() => {
+    const senhaInput = fixture.nativeElement.querySelector('input[name="senhaInput"]');
+    const testValue = '';
+
+    component.usuario.senha = testValue;
+    fixture.detectChanges();
+    tick();
+
+    expect(senhaInput.value).toEqual(testValue);
+  }));
 });

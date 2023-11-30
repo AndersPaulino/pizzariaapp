@@ -49,8 +49,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-pizzadetails [pizza]="pizzaSelecionadoParaEdicao"
-            (retorno)="addOuEditarPizza($event)"></app-pizzadetails>
+        <app-pizzadetails [pizza]="pizzaSelecionadoParaEdicao" (retorno)="addOuEditarPizza($event)"></app-pizzadetails>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

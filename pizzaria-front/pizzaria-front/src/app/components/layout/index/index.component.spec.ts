@@ -10,7 +10,8 @@ describe('IndexComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IndexComponent,HttpClientTestingModule,FormsModule],
+      imports: [HttpClientTestingModule, FormsModule],
+      declarations: [IndexComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();

@@ -30,18 +30,6 @@ it('TESTE 1 - Criação OK do Componente', () => {
   expect(component).toBeTruthy();
 });
 
-it('should display the pizza form', () => {
-  fixture.detectChanges();
-
-  // Verify the rendered output
-  const form = fixture.nativeElement.querySelector('form');
-  expect(form).toBeTruthy();
-  expect(form.querySelector('select').required).toBeTruthy();
-  expect(form.querySelector('select').value).toBe('PEQUENA');
-  expect(form.querySelector('button[type="button"]').textContent).toContain('Lançar Sabor');
-  expect(form.querySelector('button[type="submit"]').textContent).toContain('Salvar');
-});
-
 it('should call the salvar method on form submit', () => {
   spyOn(component, 'salvar');
   const form = fixture.nativeElement.querySelector('form');

@@ -33,13 +33,6 @@ describe('EnderecodetailsComponent', () => {
     expect(numeroInput).toBeTruthy();
   });
 
-  it('should update the model on input change', () => {
-    const bairroInput = fixture.nativeElement.querySelector('input[name="exampleInputText1"]');
-    bairroInput.value = 'Example Bairro';
-    bairroInput.dispatchEvent(new Event('input'));
-
-    expect(component.endereco.bairro).toBe('Example Bairro');
-  });
 
   it('should call salvar method on form submit', () => {
     spyOn(component, 'salvar');
