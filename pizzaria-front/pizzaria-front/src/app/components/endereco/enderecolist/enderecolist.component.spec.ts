@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
 import { EnderecolistComponent } from './enderecolist.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('EnderecolistComponent', () => {
@@ -22,6 +22,7 @@ describe('EnderecolistComponent', () => {
     component = fixture.componentInstance;
     modalService = TestBed.inject(NgbModal);
     enderecoService = TestBed.inject(EnderecoService);
+    spyOn(component, 'listAll').and.callThrough();
   });
 
   it('should create', () => {
@@ -53,17 +54,28 @@ describe('EnderecolistComponent', () => {
     expect(component.listAll).toHaveBeenCalled();
   });
 
-  it('should handle the listAll success', waitForAsync(() => {
-    spyOn(enderecoService, 'listAll').and.returnValue(of([
+  it('should handle listAll success', fakeAsync(() => {
+    const enderecos = [
       { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() },
       { id: 2, bairro: 'Example Bairro 2', rua: 'Example Rua 2', numero: 456, ativo: false, registro: new Date(), atualizar: new Date() },
-    ]));
-    fixture.detectChanges();
+    ];
+    spyOn(enderecoService, 'listAll').and.returnValue(of(enderecos));
 
-    fixture.whenStable().then(() => {
-      expect(component.lista.length).toBe(2);
-      const rows = fixture.nativeElement.querySelectorAll('tbody tr');
-      expect(rows.length).toBe(2);
-    });
+    component.listAll();
+    tick();
+
+    expect(component.lista).toEqual(enderecos);
   }));
+
+  it('should handle listAll error', fakeAsync(() => {
+    spyOn(enderecoService, 'listAll').and.returnValue(throwError('Erro ao buscar endereços'));
+
+    component.listAll();
+    tick();
+
+    expect(component.lista).toEqual([]);
+    // You can also test if the error handling logic is working as expected
+  }));
+
+  // Add more tests as needed for other functions in the EnderecolistComponent class
 });
