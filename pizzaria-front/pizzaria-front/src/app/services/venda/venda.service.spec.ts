@@ -1,29 +1,37 @@
-import { TestBed,ComponentFixture } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { VendaService } from './venda.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Venda } from 'src/app/models/venda/venda';
 
 describe('VendaService', () => {
-    let component: VendaService;
-    let fixture: ComponentFixture<VendaService>;
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        declarations: [VendaService],
-        imports: [HttpClientTestingModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      });
-      fixture = TestBed.createComponent(VendaService);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+  let service: VendaService;
+  let httpMock: HttpTestingController;
 
-  it('should be created', () => {
-    expect(VendaService).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [VendaService]
+    });
+    service = TestBed.inject(VendaService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-    //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return an Observable<Venda[]>', () => {
+    const mockVendas: Venda[] = [];
+    service.listAll().subscribe(vendas => {
+      expect(vendas).toEqual(mockVendas);
+    });
+
+    const req = httpMock.expectOne('http://localhost:9090/api/venda');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockVendas);
   });
 });

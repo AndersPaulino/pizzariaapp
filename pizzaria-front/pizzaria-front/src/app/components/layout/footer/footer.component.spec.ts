@@ -11,7 +11,7 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
-      imports: [HttpClientTestingModule,FormsModule],
+      imports: [HttpClientTestingModule, FormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(FooterComponent);
@@ -23,16 +23,16 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-  expect(component).toBeTruthy();
-});
+  // CASO DE TESTE 1
+  it('TESTE 1 - Criação OK do Componente', () => {
+    expect(component).toBeTruthy();
+  });
 
-it('deve conter o texto adequado no parágrafo', () => {
-  const paragraphElement: HTMLElement = fixture.nativeElement.querySelector('p');
-  expect(paragraphElement).toBeTruthy();
+  it('deve conter o texto adequado no parágrafo', () => {
+    const paragraphElement: HTMLElement = fixture.nativeElement.querySelector('p');
+    expect(paragraphElement).toBeTruthy();
 
-  const expectedText = 'Criado por Anderson Paulino e Matheus Aguiar\nAlunos do 4 Periodo de Engenharia de Software\n©UniÁmerica';
-  expect(paragraphElement.textContent).toContain(expectedText);
-});
+    const expectedText = 'Criado por Anderson Paulino e Matheus Aguiar<br>Alunos do 4 Periodo de Engenharia de Software<br>©UniÁmerica';
+    expect(paragraphElement.innerHTML).toContain(expectedText);
+  });
 });

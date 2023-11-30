@@ -24,8 +24,4 @@ describe('IndexComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-  expect(component).toBeTruthy();
-});
 });

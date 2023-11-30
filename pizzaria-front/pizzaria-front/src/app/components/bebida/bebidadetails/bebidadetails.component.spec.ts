@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Bebida } from 'src/app/models/bebida/bebida';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { BebidaService } from 'src/app/services/bebida/bebida.service';
 
 describe('BebidaDetailsComponent', () => {
   let component: BebidaDetailsComponent;
   let fixture: ComponentFixture<BebidaDetailsComponent>;
+  let service: BebidaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,6 +19,7 @@ describe('BebidaDetailsComponent', () => {
     });
     fixture = TestBed.createComponent(BebidaDetailsComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(BebidaService);
     fixture.detectChanges();
   });
 
@@ -64,5 +67,51 @@ describe('BebidaDetailsComponent', () => {
     expect(component.retorno.emit).toHaveBeenCalledWith(bebida);
   }));
 
-  // Adicione mais casos de teste conforme necessário
+// CASO DE TESTE 4
+it('TESTE 4 - Criação OK do Service', () => {
+  const bebida = new Bebida();
+  bebida.nomeBebida = 'Coca-Cola';
+  bebida.valorBebida = 3.5;
+
+  service.cadastrarBebida(bebida).subscribe();
+
+  const expected = { nome: 'Coca-Cola', valor: 3.5 };
+  const actual = service.cadastrarBebida;
+
+  expect(actual).toEqual(expected);
+});
+
+// CASO DE TESTE 5
+it('TESTE 5 - Atualização de Bebida', () => {
+  const bebidaAtual = new Bebida();
+  bebidaAtual.nomeBebida = 'Coca-Cola Atualizada';
+  bebidaAtual.valorBebida = 3.9;
+
+  service.atualizarBebida(1, bebidaAtual).subscribe();
+
+  const expected = { nome: 'Coca-Cola Atualizada', valor: 3.9 };
+  const actual = service.atualizarBebida;
+
+  expect(actual).toEqual(expected);
+});
+
+// CASO DE TESTE 6
+it('TESTE 6 - Deletar Bebida', () => {
+  service.deletarBebida(1).subscribe();
+
+  const expectedLength = 0;
+  const actualLength = service.listAll.length;
+
+  expect(actualLength).toEqual(expectedLength);
+});
+
+// CASO DE TESTE 7
+it('TESTE 7 - Exemplo de Erro', () => {
+  service.exemploErro().subscribe();
+
+  const expectedError = 'Erro ao obter bebidas';
+  const actualError = service.exemploErro;
+
+  expect(actualError).toEqual(expectedError);
+});
 });
