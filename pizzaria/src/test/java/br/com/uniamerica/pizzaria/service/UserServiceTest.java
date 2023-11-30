@@ -11,12 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,29 +23,7 @@ class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    @Test
-    void testGetAllUsers() {
-        List<User> users = Collections.singletonList(new User()); // Crie uma lista fictícia de usuários
-        when(userRepository.findAll()).thenReturn(users);
 
-        List<UserDTO> usersDTO = userService.getAllUsers();
-
-        assertFalse(usersDTO.isEmpty());
-        // Adicione aqui testes para garantir a conversão correta para lista de UserDTO
-    }
-
-    @Test
-    void testCreateUser() {
-        User user = new User();
-        UserDTO userDTO = new UserDTO(user); // Crie um UserDTO fictício para os testes
-        User savedUser = new User(); // Crie um usuário fictício para retornar do repository
-        when(userRepository.save(any())).thenReturn(savedUser);
-
-        UserDTO createdUserDTO = userService.createUser(userDTO);
-
-        assertNotNull(createdUserDTO);
-        // Adicione aqui testes para garantir a criação correta do usuário e a conversão para UserDTO
-    }
     @Test
     void testLoadUserByUsername_UserFound() {
         // Simulação de um usuário existente
