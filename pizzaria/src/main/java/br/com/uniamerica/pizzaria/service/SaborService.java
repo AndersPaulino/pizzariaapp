@@ -90,9 +90,10 @@ public class SaborService {
 
     public void desativar(Long id){
         Optional<Sabor> sabor = saborRepository.findById(id);
-        Sabor sabor1 = sabor.get();
+
 
         if (sabor.isPresent()){
+            Sabor sabor1 = sabor.get();
             sabor1.setAtivo(false);
             saborRepository.save(sabor1);
             throw new IllegalArgumentException("Sabor desativado com sucesso!");

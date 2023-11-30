@@ -102,9 +102,10 @@ public class ClienteService {
 
     public void desativar(Long id){
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        Cliente cliente = clienteOptional.get();
+
 
         if (clienteOptional.isPresent()){
+            Cliente cliente = clienteOptional.get();
             cliente.setAtivo(false);
             clienteRepository.save(cliente);
             throw new IllegalArgumentException("Cliente desativado com sucesso!");

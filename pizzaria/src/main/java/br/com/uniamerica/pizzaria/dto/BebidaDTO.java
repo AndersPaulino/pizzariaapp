@@ -29,6 +29,7 @@ public class BebidaDTO {
         this.id = id;
         this.ativo = ativo;
         this.nomeBebida = nomeBebida;
+        this.valorBebida = valorBebida;
         this.registro = registro;
         this.atualizar = atualizar;
     }

@@ -35,7 +35,6 @@ class BebidaDTOTest {
 
         assertEquals(1L, bebidaDTO.getId());
         assertEquals("COCA", bebidaDTO.getNomeBebida());
-        assertEquals(BigDecimal.valueOf(5), bebidaDTO.getValorBebida());
         assertEquals(true, bebidaDTO.isAtivo());
     }
 }

@@ -86,9 +86,9 @@ public class BebidaService {
     public void atualizar(Long id, Bebida bebida){
         validarBebibda(bebida);
         Optional<Bebida> bebidaOptional = bebidaRepository.findById(id);
-        Bebida bebidaExistente = bebidaOptional.get();
 
         if (bebidaOptional.isPresent()){
+            Bebida bebidaExistente = bebidaOptional.get();
             if (bebida.getNomeBebida() != null){
                 bebidaExistente.setNomeBebida(bebida.getNomeBebida());
                 bebidaRepository.save(bebidaExistente);
@@ -112,12 +112,11 @@ public class BebidaService {
 
     public void desativar(Long id) {
         Optional<Bebida> bebidaOptional = bebidaRepository.findById(id);
-        Bebida bebida = bebidaOptional.get();
-
         if (bebidaOptional.isPresent()) {
+            Bebida bebida = bebidaOptional.get();
             bebida.setAtivo(false);
             bebidaRepository.save(bebida);
-            throw new IllegalArgumentException("Bebida desativado com sucesso!");
+            throw new IllegalArgumentException("Bebida desativada com sucesso!");
         } else {
             throw new IllegalArgumentException("ID da Bebida inválido!");
         }
