@@ -1,30 +1,39 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
 import { ClientelistComponent } from './clientelist.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
+import { of } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ClientelistComponent', () => {
   let component: ClientelistComponent;
   let fixture: ComponentFixture<ClientelistComponent>;
+  let modalService: NgbModal;
+  let clienteService: ClienteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ClientelistComponent],
-      imports: [HttpClientTestingModule,FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [FormsModule, NgbModalModule, HttpClientModule],
+      providers: [NgbModal, ClienteService],
     });
     fixture = TestBed.createComponent(ClientelistComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    modalService = TestBed.inject(NgbModal);
+    clienteService = TestBed.inject(ClienteService);
+    spyOn(component, 'listAll').and.callThrough();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
-it('TESTE 1 - Criação OK do Componente', () => {
-  expect(component).toBeTruthy();
-});
+  it('should open modal on adicionar', () => {
+    spyOn(modalService, 'open').and.returnValue({ result: Promise.resolve(true) } as NgbModalRef);
+    component.adicionar({});
+    expect(modalService.open).toHaveBeenCalled();
+  });
+
+  
 });

@@ -102,4 +102,61 @@ describe('BebidaDetailsComponent', () => {
     expect(component.bebida.nomeBebida).toEqual(newNome);
     expect(component.bebida.valorBebida).toEqual(newValor);
   }));
+
+  it('should not emit the bebida when salvar is called with invalid data', () => {
+    const bebida = new Bebida();
+    spyOn(component.retorno, 'emit');
+  
+    component.bebida = bebida;
+    component.salvar();
+  
+    // Expectations: The emit should not have been called since the form is invalid
+    expect(component.retorno.emit).not.toHaveBeenCalled();
+  });
+  
+  it('should display an error message for invalid form data', waitForAsync(() => {
+    component.bebida = new Bebida();
+    fixture.detectChanges();
+  
+    const compiled = fixture.debugElement.nativeElement;
+  
+    const submitButton = compiled.querySelector('button[type="submit"]');
+    submitButton.click(); // Trigger form submission without filling in the fields
+  
+    fixture.detectChanges();
+  
+    const errorMessage = compiled.querySelector('.error-message');
+    expect(errorMessage).toBeTruthy();
+    expect(errorMessage.textContent).toContain('Please fill in the required fields.');
+  }));
+  
+  it('should emit the bebida with updated values when salvar is called with changes', () => {
+    const originalBebida: Bebida = {
+      id: 1,
+      ativo: true,
+      registro: new Date(),
+      atualizar: new Date(),
+      nomeBebida: 'Original Bebida',
+      valorBebida: 10.99,
+    };
+  
+    const updatedBebida: Bebida = {
+      ...originalBebida,
+      nomeBebida: 'Updated Bebida',
+      valorBebida: 15.99,
+    };
+  
+    spyOn(component.retorno, 'emit');
+  
+    component.bebida = originalBebida;
+    component.salvar();
+  
+    // Update the component's bebida property with the updated data
+    component.bebida = updatedBebida;
+    component.salvar();
+  
+    // Expectations: The emit should be called with the updated bebida
+    expect(component.retorno.emit).toHaveBeenCalledWith(updatedBebida);
+  });
+  
 });

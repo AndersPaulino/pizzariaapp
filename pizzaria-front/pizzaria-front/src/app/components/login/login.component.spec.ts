@@ -38,6 +38,8 @@ describe('LoginComponent', () => {
       loginInput.value = testValue;
       loginInput.dispatchEvent(new Event('input'));
 
+      fixture.detectChanges(); // Detect changes after updating input value
+
       expect(component.usuario.login).toEqual(testValue);
     });
   }));
@@ -50,6 +52,8 @@ describe('LoginComponent', () => {
       senhaInput.value = testValue;
       senhaInput.dispatchEvent(new Event('input'));
 
+      fixture.detectChanges(); // Detect changes after updating input value
+
       expect(component.usuario.senha).toEqual(testValue);
     });
   }));
@@ -57,14 +61,13 @@ describe('LoginComponent', () => {
   it('should update the view when usuario.login changes', fakeAsync(() => {
     const loginInput = fixture.nativeElement.querySelector('input[name="loginInput"]');
     const testValue = '';
-  
+
     component.usuario.login = testValue;
     fixture.detectChanges();
     tick();
-  
+
     expect(loginInput.value).toEqual(testValue);
   }));
-  
 
   it('should update the view when usuario.senha changes', fakeAsync(() => {
     const senhaInput = fixture.nativeElement.querySelector('input[name="senhaInput"]');

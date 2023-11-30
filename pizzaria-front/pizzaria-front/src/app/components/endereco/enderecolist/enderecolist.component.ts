@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject , OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Endereco } from 'src/app/models/endereco/endereco';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
@@ -8,7 +8,7 @@ import { EnderecoService } from 'src/app/services/endereco/endereco.service';
   templateUrl: './enderecolist.component.html',
   styleUrls: ['./enderecolist.component.scss']
 })
-export class EnderecolistComponent {
+export class EnderecolistComponent implements OnInit{
   lista: Endereco[] = [];
 
   @Output() retorno = new EventEmitter<Endereco>();
@@ -21,7 +21,13 @@ export class EnderecolistComponent {
   modalRef!: NgbModalRef;
   enderecoService = inject(EnderecoService);
 
-  constructor() {
+  constructor(modalService: NgbModal, enderecoService: EnderecoService) {
+    this.modalService = modalService;
+    this.enderecoService = enderecoService;
+    this.listAll();
+  }
+
+  ngOnInit() {
     this.listAll();
   }
 

@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EnderecolistComponent } from './enderecolist.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
 import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +28,6 @@ describe('EnderecolistComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('should display the list of addresses', () => {
     component.lista = [
       { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() },
@@ -48,4 +47,23 @@ describe('EnderecolistComponent', () => {
     expect(rows[1].cells[4].textContent).toContain('Não');
   });
 
+  it('should call listAll on ngOnInit', () => {
+    spyOn(component, 'listAll');
+    component.ngOnInit();
+    expect(component.listAll).toHaveBeenCalled();
+  });
+
+  it('should handle the listAll success', waitForAsync(() => {
+    spyOn(enderecoService, 'listAll').and.returnValue(of([
+      { id: 1, bairro: 'Example Bairro 1', rua: 'Example Rua 1', numero: 123, ativo: true, registro: new Date(), atualizar: new Date() },
+      { id: 2, bairro: 'Example Bairro 2', rua: 'Example Rua 2', numero: 456, ativo: false, registro: new Date(), atualizar: new Date() },
+    ]));
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(component.lista.length).toBe(2);
+      const rows = fixture.nativeElement.querySelectorAll('tbody tr');
+      expect(rows.length).toBe(2);
+    });
+  }));
 });
