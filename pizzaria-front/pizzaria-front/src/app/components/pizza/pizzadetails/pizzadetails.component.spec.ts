@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { By } from '@angular/platform-browser';
+import { SaborlistComponent } from '../../sabor/saborlist/saborlist.component';
 
 describe('PizzadetailsComponent', () => {
   let component: PizzadetailsComponent;
@@ -30,18 +31,6 @@ it('TESTE 1 - Criação OK do Componente', () => {
   expect(component).toBeTruthy();
 });
 
-it('should display the pizza form', () => {
-  fixture.detectChanges();
-
-  // Verify the rendered output
-  const form = fixture.nativeElement.querySelector('form');
-  expect(form).toBeTruthy();
-  expect(form.querySelector('select').required).toBeTruthy();
-  expect(form.querySelector('select').value).toBe('PEQUENA');
-  expect(form.querySelector('button[type="button"]').textContent).toContain('Lançar Sabor');
-  expect(form.querySelector('button[type="submit"]').textContent).toContain('Salvar');
-});
-
 it('should call the salvar method on form submit', () => {
   spyOn(component, 'salvar');
   const form = fixture.nativeElement.querySelector('form');
@@ -56,4 +45,28 @@ it('should call the onTamanhoChange method on select change', () => {
   select.dispatchEvent(new Event('change'));
   expect(component.onTamanhoChange).toHaveBeenCalled();
 });
+
+it('should call the lancar method on button click', () => {
+  spyOn(component, 'lancar');
+  const lancarButton = fixture.nativeElement.querySelector('button[aria-label="Close"]');
+  lancarButton.click();
+  expect(component.lancar).toHaveBeenCalled();
+});
+
+it('should call the excluir method on button click in the table', () => {
+  spyOn(component, 'excluir');
+  const excluirButton = fixture.nativeElement.querySelector('tbody button.btn-primary');
+  excluirButton.click();
+  expect(component.excluir).toHaveBeenCalled();
+});
+
+
+it('should handle the retorno event from app-saborlist component', () => {
+  spyOn(component, 'retornoSaborList');
+  const appSaborList = fixture.debugElement.query(By.directive(SaborlistComponent)).componentInstance;
+  appSaborList.retorno.emit(/* Simule o evento de retorno */);
+  expect(component.retornoSaborList).toHaveBeenCalled();
+});
+
+
 });

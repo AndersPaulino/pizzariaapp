@@ -11,7 +11,6 @@ import { EnderecolistComponent } from './components/endereco/enderecolist/endere
 import { EnderecodetailsComponent } from './components/endereco/enderecodetails/enderecodetails.component';
 import { FuncionariolistComponent } from './components/funcionario/funcionariolist/funcionariolist.component';
 import { FuncionariodetailsComponent } from './components/funcionario/funcionariodetails/funcionariodetails.component';
-import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { PizzalistComponent } from './components/pizza/pizzalist/pizzalist.component';
@@ -22,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import { VendaListComponent } from './components/venda/vendalist/vendalist.component';
 import { VendadetailsComponent } from './components/venda/vendadetails/vendadetails.component';
 import { IndexComponent } from './components/layout/index/index.component';
+import { HeaderComponent } from './components/layout/header/header.component';
 import { BebidaListComponent } from './components/bebida/bebidalist/bebidalist.component';
 import { BebidaDetailsComponent } from './components/bebida/bebidadetails/bebidadetails.component';
 

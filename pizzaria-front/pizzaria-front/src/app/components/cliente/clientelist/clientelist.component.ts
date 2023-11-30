@@ -68,9 +68,11 @@ export class ClientelistComponent {
 
     if (cliente.id) {
       console.log("Aqui foi atualizar");
+      console.log(cliente);
       this.clienteService.atualizarCliente(cliente.id, cliente).subscribe(onComplete);
     } else {
       console.log("Aqui foi cadastrar");
+      console.log(cliente);
       this.clienteService.cadastrarCliente(cliente).subscribe(onComplete);
     }
   }

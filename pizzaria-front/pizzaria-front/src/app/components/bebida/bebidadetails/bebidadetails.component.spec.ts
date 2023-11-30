@@ -1,35 +1,45 @@
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { BebidaDetailsComponent } from './bebidadetails.component';
 import { FormsModule } from '@angular/forms';
 import { Bebida } from 'src/app/models/bebida/bebida';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BebidaService } from 'src/app/services/bebida/bebida.service';
+import { inject } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('BebidaDetailsComponent', () => {
   let component: BebidaDetailsComponent;
   let fixture: ComponentFixture<BebidaDetailsComponent>;
-  let service: BebidaService;
+  let bebidaService: BebidaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BebidaDetailsComponent],
-      imports: [HttpClientTestingModule, FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [FormsModule, HttpClientModule],
+      providers: [BebidaService],
     });
     fixture = TestBed.createComponent(BebidaDetailsComponent);
     component = fixture.componentInstance;
-    service = TestBed.inject(BebidaService);
-    fixture.detectChanges();
+    bebidaService = TestBed.inject(BebidaService);
   });
 
-  // CASO DE TESTE 1
-  it('TESTE 1 - Criação OK do Componente', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // CASO DE TESTE 2
-  it('TESTE 2 - Inicialização do formulário', () => {
+  it('should emit the bebida when salvar is called', () => {
+    const bebida = new Bebida();
+    spyOn(component.retorno, 'emit');
+
+    component.bebida = bebida;
+    component.salvar();
+
+    expect(component.retorno.emit).toHaveBeenCalledWith(bebida);
+  });
+
+  it('should render the form with input fields and a submit button', waitForAsync(() => {
+    component.bebida = new Bebida();
+    fixture.detectChanges();
+
     const formElement = fixture.nativeElement.querySelector('form');
     expect(formElement).toBeTruthy();
 
@@ -40,78 +50,56 @@ describe('BebidaDetailsComponent', () => {
     expect(nomeInput).toBeTruthy();
     expect(valorInput).toBeTruthy();
     expect(submitButton).toBeTruthy();
-  });
-
-  // CASO DE TESTE 3
-  it('TESTE 3 - Submissão do formulário', fakeAsync(() => {
-    spyOn(component.retorno, 'emit');
-    const bebida = new Bebida();
-    component.bebida = bebida;
-
-    const nomeInput = fixture.nativeElement.querySelector('input[name="exampleInputText1"]');
-    const valorInput = fixture.nativeElement.querySelector('input[name="exampleInputPassword1"]');
-    const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
-
-    // Simula a entrada de dados
-    nomeInput.value = 'Coca-Cola';
-    valorInput.value = 3.5;
-    nomeInput.dispatchEvent(new Event('input'));
-    valorInput.dispatchEvent(new Event('input'));
-
-    // Submete o formulário
-    submitButton.click();
-    tick();
-    fixture.detectChanges();
-
-    // Verifica se o evento de retorno foi chamado com a bebida correta
-    expect(component.retorno.emit).toHaveBeenCalledWith(bebida);
   }));
 
-// CASO DE TESTE 4
-it('TESTE 4 - Criação OK do Service', () => {
-  const bebida = new Bebida();
-  bebida.nomeBebida = 'Coca-Cola';
-  bebida.valorBebida = 3.5;
+  it('should bind the input fields correctly', waitForAsync(() => {
+    const compiled = fixture.debugElement.nativeElement;
 
-  service.cadastrarBebida(bebida).subscribe();
+    // Simulate user input
+    const nomeInput = compiled.querySelector('input[name="exampleInputText1"]');
+    const valorInput = compiled.querySelector('input[name="exampleInputPassword1"]');
 
-  const expected = { nome: 'Coca-Cola', valor: 3.5 };
-  const actual = service.cadastrarBebida;
+    const mockBebida: Bebida = {
+      id: 1,
+      ativo: true,
+      registro: new Date(),
+      atualizar: new Date(),
+      nomeBebida: 'Test Bebida',
+      valorBebida: 10.99,
+    };
 
-  expect(actual).toEqual(expected);
-});
+    // Update the component's bebida property with the mock data
+    component.bebida = mockBebida;
+    fixture.detectChanges();
 
-// CASO DE TESTE 5
-it('TESTE 5 - Atualização de Bebida', () => {
-  const bebidaAtual = new Bebida();
-  bebidaAtual.nomeBebida = 'Coca-Cola Atualizada';
-  bebidaAtual.valorBebida = 3.9;
+    // Check if the input fields are correctly bound
+    expect(nomeInput.value).toEqual(mockBebida.nomeBebida);
+    expect(parseFloat(valorInput.value)).toEqual(mockBebida.valorBebida);
+}));
 
-  service.atualizarBebida(1, bebidaAtual).subscribe();
 
-  const expected = { nome: 'Coca-Cola Atualizada', valor: 3.9 };
-  const actual = service.atualizarBebida;
+  it('should update the component property on input changes', waitForAsync(() => {
+    const compiled = fixture.debugElement.nativeElement;
 
-  expect(actual).toEqual(expected);
-});
+    // Simulate user input
+    const nomeInput = compiled.querySelector('input[name="exampleInputText1"]');
+    const valorInput = compiled.querySelector('input[name="exampleInputPassword1"]');
 
-// CASO DE TESTE 6
-it('TESTE 6 - Deletar Bebida', () => {
-  service.deletarBebida(1).subscribe();
+    // Update input fields with new values
+    const newNome = 'New Test Bebida';
+    const newValor = 15.99;
 
-  const expectedLength = 0;
-  const actualLength = service.listAll.length;
+    // Trigger input events to simulate user typing
+    nomeInput.value = newNome;
+    nomeInput.dispatchEvent(new Event('input'));
 
-  expect(actualLength).toEqual(expectedLength);
-});
+    valorInput.value = newValor.toString();
+    valorInput.dispatchEvent(new Event('input'));
 
-// CASO DE TESTE 7
-it('TESTE 7 - Exemplo de Erro', () => {
-  service.exemploErro().subscribe();
+    fixture.detectChanges();
 
-  const expectedError = 'Erro ao obter bebidas';
-  const actualError = service.exemploErro;
-
-  expect(actualError).toEqual(expectedError);
-});
+    // Check if the component property is correctly updated
+    expect(component.bebida.nomeBebida).toEqual(newNome);
+    expect(component.bebida.valorBebida).toEqual(newValor);
+  }));
 });

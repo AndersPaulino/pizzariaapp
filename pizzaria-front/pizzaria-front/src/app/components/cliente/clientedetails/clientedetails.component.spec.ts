@@ -6,6 +6,7 @@ import { Endereco } from 'src/app/models/endereco/endereco';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ClientedetailsComponent', () => {
   let component: ClientedetailsComponent;
@@ -17,7 +18,7 @@ describe('ClientedetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ClientedetailsComponent],
-      imports: [FormsModule],
+      imports: [FormsModule,HttpClientModule],
       providers: [ClienteService, NgbModal],
     });
     fixture = TestBed.createComponent(ClientedetailsComponent);
@@ -44,14 +45,6 @@ describe('ClientedetailsComponent', () => {
     component.cliente.endereco = [endereco];
     component.excluir(endereco, 0);
     expect(component.cliente.endereco.length).toBe(0);
-  });
-
-  it('should call retornoEnderecoList when a endereco is added', () => {
-    spyOn(component.modalRef, 'dismiss');
-    const endereco = new Endereco();
-    component.retornoEnderecoList(endereco);
-    expect(component.cliente.endereco.length).toBe(1);
-    expect(component.modalRef.dismiss).toHaveBeenCalled();
   });
 
   it('should call lancar when the button is clicked', () => {

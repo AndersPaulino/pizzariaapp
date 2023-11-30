@@ -1,5 +1,6 @@
+<section>
 <div class="container">
-    <h3 class="alert alert-primary">Listagem de Pizzas</h3>
+    <h3 class="alert">Pizzas</h3>
     <button type="button" class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button>
     <div class="row">
         <div class="col-lg-12">
@@ -41,7 +42,7 @@
         </div>
     </div>
 </div>
-
+</section>
 
 <ng-template #modal1 let-modal>
     <div class="modal-header">
@@ -49,8 +50,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-pizzadetails [pizza]="pizzaSelecionadoParaEdicao"
-            (retorno)="addOuEditarPizza($event)"></app-pizzadetails>
+        <app-pizzadetails [pizza]="pizzaSelecionadoParaEdicao" (retorno)="addOuEditarPizza($event)"></app-pizzadetails>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
