@@ -13,14 +13,14 @@ import java.util.List;
 public class VendaDTO {
 
     private Long id;
-    private Cliente cliente;
-    private Funcionario funcionario;
+    private List<Cliente> cliente;
+    private List<Funcionario> funcionario;
     private List<Pizza> pizzas = new ArrayList<>();
     private List<Bebida> bebidas = new ArrayList<>();
     private LocalDateTime registro;
     private BigDecimal valorVenda;
 
-    public VendaDTO(Long id, Cliente cliente, Funcionario funcionario, List<Pizza> pizzas, List<Bebida> bebidas, LocalDateTime registro, BigDecimal valorVenda) {
+    public VendaDTO(Long id, List<Cliente> cliente, List<Funcionario> funcionario, List<Pizza> pizzas, List<Bebida> bebidas, LocalDateTime registro, BigDecimal valorVenda) {
         this.id = id;
         this.cliente = cliente;
         this.funcionario = funcionario;

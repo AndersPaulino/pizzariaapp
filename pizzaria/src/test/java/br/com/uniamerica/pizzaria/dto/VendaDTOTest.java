@@ -36,8 +36,8 @@ class VendaDTOTest {
     void testConstructorWithIndividualsParameteres() {
         // Dados de exemplo para serem utilizados no teste
         Long id = 1L;
-        Cliente cliente = mock(Cliente.class); // Mock do Cliente (ou crie um objeto Cliente)
-        Funcionario funcionario = mock(Funcionario.class); // Mock do Funcionario (ou crie um objeto Funcionario)
+        List<Cliente> cliente = new ArrayList<>(); // Mock do Cliente (ou crie um objeto Cliente)
+        List<Funcionario> funcionario = new ArrayList<>(); // Mock do Funcionario (ou crie um objeto Funcionario)
         List<Pizza> pizzas = new ArrayList<>(); // Preencha com pizzas desejadas
         List<Bebida> bebidas = new ArrayList<>(); // Preencha com bebidas desejadas
         LocalDateTime registro = LocalDateTime.now();

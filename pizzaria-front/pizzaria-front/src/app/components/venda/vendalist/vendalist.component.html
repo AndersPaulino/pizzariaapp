@@ -22,8 +22,8 @@
             <!-- Dentro do loop *ngFor para listar as vendas -->
             <tr *ngFor="let venda of lista; let i = index">
               <th scope="row">{{ venda.id }}</th>
-              <td>{{ venda.cliente.nomeCliente }}</td>
-              <td>{{ venda.funcionario.nomeFuncionario }}</td>
+              <td *ngFor="let cliente of venda.cliente">{{ cliente.nomeCliente }}</td>
+              <td *ngFor="let funcionario of venda.funcionario">{{ funcionario.nomeFuncionario }}</td>
               <td>
                 <ng-container *ngFor="let pizza of venda.pizzas; let last = last">
                   {{ pizza.qtdeSabor }}x
@@ -74,3 +74,4 @@
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
     </div>
   </ng-template>
+  

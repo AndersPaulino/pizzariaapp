@@ -13,14 +13,14 @@ public class Venda extends AbsctractEntity{
 
     @Getter
     @Setter
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private List<Cliente> cliente;
 
     @Getter @Setter
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
+    private List<Funcionario> funcionario = new ArrayList<>();
 
     @Getter @Setter
     @ManyToMany

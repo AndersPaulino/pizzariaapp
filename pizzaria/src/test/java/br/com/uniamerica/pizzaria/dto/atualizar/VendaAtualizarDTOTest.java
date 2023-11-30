@@ -28,8 +28,6 @@ class VendaAtualizarDTOTest {
 
         // Criando uma venda fictícia para utilizar nos testes
         venda = new Venda();
-        venda.setCliente(cliente);
-        venda.setFuncionario(funcionario);
         venda.setPizzas(pizzas);
         venda.setBebidas(bebidas);
         venda.setValorVenda(valorVenda);
@@ -52,8 +50,8 @@ class VendaAtualizarDTOTest {
     void testConstructorWithFields() {
         // Dados de exemplo para serem utilizados no teste
         Long id = 2L;
-        Cliente cliente = new Cliente();
-        Funcionario funcionario = new Funcionario();
+        List<Cliente> cliente = new ArrayList<>();
+        List<Funcionario> funcionario = new ArrayList<>();
         List<Pizza> pizzas = new ArrayList<>();
         List<Bebida> bebidas = new ArrayList<>();
         BigDecimal valorVenda = BigDecimal.valueOf(150.0);

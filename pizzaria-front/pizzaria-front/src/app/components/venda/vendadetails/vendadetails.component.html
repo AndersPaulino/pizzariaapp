@@ -21,11 +21,11 @@
             <tbody>
                 <tr>
                     <td>{{ venda.id }}</td>
-                    <td>{{ venda.cliente.nomeCliente }}</td>
-                    <td>{{ venda.funcionario.nomeFuncionario }}</td>
+                    <td *ngFor="let cliente of venda.cliente">{{ cliente.nomeCliente }}</td>
+                    <td *ngFor="let funcionario of venda.funcionario">{{ funcionario.nomeFuncionario }}</td>
                     <td>
                         <ul>
-                            <li *ngFor="let pizza of venda.pizzas">{{ pizza.sabor }}</li>
+                            <li *ngFor="let pizza of venda.pizzas">{{ pizza.sabor[0] + "(" + pizza.tamanho +")" }}</li>
                         </ul>
                     </td>
                     <td>
@@ -140,4 +140,4 @@
         </div>
       </div>
     </div>
-  </ng-template>
+  </ng-template> 
