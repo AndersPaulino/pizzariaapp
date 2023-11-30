@@ -21,8 +21,8 @@ class VendaCadastroDTOTest {
     void setUp() {
         // Dados fictícios para simular uma venda
         Long id = 1L;
-        Cliente cliente = new Cliente();
-        Funcionario funcionario = new Funcionario();
+        List<Cliente> cliente = new ArrayList<>();
+        List<Funcionario> funcionario = new ArrayList<>();
         List<Pizza> pizzas = new ArrayList<>();
         List<Bebida> bebidas = new ArrayList<>();
         BigDecimal valorVenda = BigDecimal.valueOf(200.0);

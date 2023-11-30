@@ -6,8 +6,8 @@ import { Pizza } from "../pizza/pizza";
 export class Venda {
     id!: number;
     ativo!: boolean;
-    cliente!: Cliente;
-    funcionario!: Funcionario;
+    cliente!: Cliente[];
+    funcionario!: Funcionario [];
     pizzas!: Pizza[];
     bebidas!: Bebida[];
     emitirNota!: boolean;
@@ -19,5 +19,7 @@ export class Venda {
     constructor() {
         this.pizzas = [];
         this.bebidas = [];
+        this.funcionario = [];
+        this.cliente = [];
     }
 }

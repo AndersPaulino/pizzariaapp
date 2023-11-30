@@ -59,12 +59,12 @@ export class VendadetailsComponent {
   }
 
   retornoClienteList(cliente: Cliente): void {
-    this.venda.cliente = cliente;
+    this.venda.cliente.push(cliente);
     this.modalRef.dismiss();
   }
 
   retornoFuncionarioList(funcionario: Funcionario): void {
-    this.venda.funcionario = funcionario;
+    this.venda.funcionario.push(funcionario);
     this.modalRef.dismiss();
   }
 

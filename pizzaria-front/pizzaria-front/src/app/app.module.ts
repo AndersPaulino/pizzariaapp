@@ -9,8 +9,6 @@ import { ClientedetailsComponent } from './components/cliente/clientedetails/cli
 import { ClientelistComponent } from './components/cliente/clientelist/clientelist.component';
 import { EnderecolistComponent } from './components/endereco/enderecolist/enderecolist.component';
 import { EnderecodetailsComponent } from './components/endereco/enderecodetails/enderecodetails.component';
-import { BebidasListComponent } from './components/bebida/bebidalist/bebidalist.component';
-import { BebidaDetailsComponent } from './components/bebida/bebidadetails/bebidadetails.component';
 import { FuncionariolistComponent } from './components/funcionario/funcionariolist/funcionariolist.component';
 import { FuncionariodetailsComponent } from './components/funcionario/funcionariodetails/funcionariodetails.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -24,6 +22,8 @@ import { VendaListComponent } from './components/venda/vendalist/vendalist.compo
 import { VendadetailsComponent } from './components/venda/vendadetails/vendadetails.component';
 import { IndexComponent } from './components/layout/index/index.component';
 import { HeaderComponent } from './components/layout/header/header.component';
+import { BebidaListComponent } from './components/bebida/bebidalist/bebidalist.component';
+import { BebidaDetailsComponent } from './components/bebida/bebidadetails/bebidadetails.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,8 @@ import { HeaderComponent } from './components/layout/header/header.component';
     ClientelistComponent,
     EnderecolistComponent,
     EnderecodetailsComponent,
-    BebidasListComponent,
     BebidaDetailsComponent,
+    BebidaListComponent,
     FuncionariolistComponent,
     FuncionariodetailsComponent,
     HeaderComponent,

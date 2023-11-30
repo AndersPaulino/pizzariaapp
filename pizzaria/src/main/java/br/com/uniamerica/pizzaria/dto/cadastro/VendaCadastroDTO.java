@@ -12,8 +12,8 @@ import java.util.List;
 @Getter @Setter
 public class VendaCadastroDTO {
     private Long id;
-    private Cliente cliente;
-    private Funcionario funcionario;
+    private List<Cliente> cliente;
+    private List<Funcionario> funcionario;
     private List<Pizza> pizzas = new ArrayList<>();
     private List<Bebida> bebidas = new ArrayList<>();
     private BigDecimal valorVenda;
@@ -28,7 +28,7 @@ public class VendaCadastroDTO {
         valorVenda = venda.getValorVenda();
         registro = venda.getRegistro();
     }
-    public VendaCadastroDTO(Long id, Cliente cliente, Funcionario funcionario, List<Pizza> pizzas, List<Bebida> bebidas, BigDecimal valorVenda, LocalDateTime registro){
+    public VendaCadastroDTO(Long id, List<Cliente> cliente, List<Funcionario> funcionario, List<Pizza> pizzas, List<Bebida> bebidas, BigDecimal valorVenda, LocalDateTime registro){
         this.id = id;
         this.cliente = cliente;
         this.funcionario = funcionario;
