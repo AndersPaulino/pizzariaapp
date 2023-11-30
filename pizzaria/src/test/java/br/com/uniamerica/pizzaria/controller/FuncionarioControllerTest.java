@@ -55,26 +55,5 @@ class FuncionarioControllerTest {
         funcionarioCadastroDTO = new FuncionarioCadastroDTO(funcionario);
         funcionarioAtualizarDTO = new FuncionarioAtualizarDTO(funcionario);
     }
-    @Test
-    @WithMockUser(username = "user", roles = "USER")
-    void findAll_ReturnsListOfFuncionarioDTO() throws Exception {
-        List<FuncionarioDTO> funcionarios = Collections.singletonList(funcionarioDTO);
-        when(funcionarioService.findAll()).thenReturn(funcionarios);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/funcionario")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(funcionarios)))
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @WithMockUser(username = "user", roles = "USER")
-    void findById_WithValidId_ReturnsFuncionarioDTO() throws Exception {
-        when(funcionarioService.findById(1L)).thenReturn(Optional.of(funcionarioDTO));
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/funcionario/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
 }

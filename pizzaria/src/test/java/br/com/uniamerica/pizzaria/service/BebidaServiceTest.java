@@ -228,7 +228,7 @@ class BebidaServiceTest {
             bebidaService.desativar(id);
         });
 
-        assertEquals("Bebida desativado com sucesso!", exception.getMessage());
+        assertEquals("Bebida desativada com sucesso!", exception.getMessage());
         assertFalse(bebida.isAtivo());
         verify(bebidaRepository, times(1)).save(bebida);
     }

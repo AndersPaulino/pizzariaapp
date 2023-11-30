@@ -74,6 +74,7 @@ public class FuncionarioService {
         validarFuncionario(funcionario);
         Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
         if (funcionarioOptional.isPresent()) {
+
             Funcionario funcionarioExistente = funcionarioOptional.get();
 
             if (funcionario.getNomeFuncionario() != null) {
