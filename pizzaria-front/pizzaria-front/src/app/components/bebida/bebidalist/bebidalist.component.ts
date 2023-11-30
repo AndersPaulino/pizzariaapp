@@ -8,7 +8,7 @@ import { BebidaService } from 'src/app/services/bebida/bebida.service';
   templateUrl: './bebidalist.component.html',
   styleUrls: ['./bebidalist.component.scss']
 })
-export class BebidasListComponent {
+export class BebidaListComponent {
 
   lista: Bebida[] = [];
 
