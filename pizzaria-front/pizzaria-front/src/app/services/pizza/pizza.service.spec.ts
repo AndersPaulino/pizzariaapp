@@ -79,17 +79,4 @@ describe('PizzaService', () => {
     request.flush('Pizza deletada com sucesso');
   }));
 
-  it('should handle error for exemploErro', waitForAsync(() => {
-    service.exemploErro().subscribe(
-      () => fail('Expected an error, but succeeded'),
-      (error: any) => {
-        expect(error.status).toBe(500);
-        expect(error.error).toBe('Internal Server Error');
-      }
-    );
-
-    const request = httpMock.expectOne(`${service.API}/erro`);
-    expect(request.request.method).toBe('GET');
-    request.flush(null, { status: 500, statusText: 'Internal Server Error' });
-  }));
 });

@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
+  menuTitle = 'Temporary Menu';
+  menuItems = ['Home', 'About', 'Services', 'Contact'];
+  activeMenuItem = 'Home';
+  content = 'menu works!';
 
+  handleMenuItemClick(item: string): void {
+    this.activeMenuItem = item;
+    // You can implement logic to handle the selected menu item
+    console.log(`Selected menu item: ${item}`);
+  }
 }

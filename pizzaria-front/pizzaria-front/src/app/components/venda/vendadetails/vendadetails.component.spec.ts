@@ -50,12 +50,12 @@ describe('VendadetailsComponent', () => {
     const mockVenda: Venda = {
       id: 1,
       ativo: true,
-      cliente: { 
-        id: 1, 
-        ativo: true, 
-        nomeCliente: 'Test Cliente', 
-        cpf: '123456789', 
-        registro: new Date(), 
+      cliente: [{
+        id: 1,
+        ativo: true,
+        nomeCliente: 'Test Cliente',
+        cpf: '123456789',
+        registro: new Date(),
         atualizar: new Date(),
         endereco: [{
           id: 1,
@@ -66,8 +66,15 @@ describe('VendadetailsComponent', () => {
           registro: new Date(),
           atualizar: new Date()
         }]
-      },
-            funcionario: { id: 1, ativo: true, nomeFuncionario: 'Test Funcionario', registro: new Date(), atualizar: new Date() },
+      }],
+      funcionario: [{
+        id: 1,
+        ativo: true,
+        nomeFuncionario: 'Test Funcionario',
+        registro: new Date(),
+        atualizar: new Date()
+      }],
+
       pizzas: [],
       bebidas: [],
       emitirNota: false,
@@ -76,15 +83,12 @@ describe('VendadetailsComponent', () => {
       registro: new Date(),
       atualizar: new Date()
     };
-  
+
     // Simula o botão sendo clicado
     component.excluirVenda(mockVenda, 0);
-  
+
     // Agora, você verifica se a função foi chamada com os parâmetros esperados
     expect(component.excluirVenda).toHaveBeenCalledWith(mockVenda, 0);
   });
-  
-
-  // Adicione mais testes conforme necessário para cobrir diferentes cenários.
 
 });

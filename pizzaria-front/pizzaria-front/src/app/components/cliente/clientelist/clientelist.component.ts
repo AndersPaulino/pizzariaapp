@@ -10,6 +10,7 @@ import { ClienteService } from 'src/app/services/cliente/cliente.service';
 export class ClientelistComponent {
 
   lista: Cliente[] = [];
+  mensagemErro: string | undefined;
 
   clienteSelecionadoParaEdicao: Cliente = new Cliente();
   indiceSelecionadoParaEdicao!: number;

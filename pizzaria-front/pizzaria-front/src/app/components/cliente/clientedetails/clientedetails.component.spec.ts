@@ -18,14 +18,14 @@ describe('ClientedetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ClientedetailsComponent],
-      imports: [FormsModule,HttpClientModule],
+      imports: [FormsModule, HttpClientModule],
       providers: [ClienteService, NgbModal],
     });
     fixture = TestBed.createComponent(ClientedetailsComponent);
     component = fixture.componentInstance;
     clienteService = TestBed.inject(ClienteService);
     modalService = TestBed.inject(NgbModal);
-    modalRef = modalService.open('content'); // Crie o objeto modalRef
+    modalRef = modalService.open('content'); // Create the modalRef object
     fixture.detectChanges();
   });
 
@@ -40,7 +40,7 @@ describe('ClientedetailsComponent', () => {
     expect(component.retorno.emit).toHaveBeenCalledWith(component.cliente);
   });
 
-  it('should call excluir when a endereco is deleted', () => {
+  it('should call excluir when an endereco is deleted', () => {
     const endereco = new Endereco();
     component.cliente.endereco = [endereco];
     component.excluir(endereco, 0);
@@ -48,8 +48,34 @@ describe('ClientedetailsComponent', () => {
   });
 
   it('should call lancar when the button is clicked', () => {
-    spyOn(modalService, 'open').and.returnValue({ componentInstance: { } } as NgbModalRef);
+    spyOn(modalService, 'open').and.returnValue({ componentInstance: {} } as NgbModalRef);
     component.lancar('modal1');
     expect(modalService.open).toHaveBeenCalled();
+  });
+
+  it('should update cliente property when endereco is deleted', () => {
+    const endereco = new Endereco();
+    component.cliente.endereco = [endereco];
+    component.excluir(endereco, 0);
+    expect(component.cliente.endereco.length).toBe(0);
+  });
+
+  it('should open modal when lancar is called', () => {
+    spyOn(modalService, 'open').and.returnValue({ componentInstance: {} } as NgbModalRef);
+    component.lancar('modal1');
+    expect(modalService.open).toHaveBeenCalled();
+  });
+
+  it('should not emit retorno event if cliente is not set', () => {
+    spyOn(component.retorno, 'emit');
+    component.salvar();
+    expect(component.retorno.emit).not.toHaveBeenCalled();
+  });
+
+  it('should not delete endereco if index is out of bounds', () => {
+    const endereco = new Endereco();
+    component.cliente.endereco = [endereco];
+    component.excluir(endereco, 1);
+    expect(component.cliente.endereco.length).toBe(1);
   });
 });

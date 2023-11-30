@@ -46,5 +46,11 @@ describe('SabordetailsComponent', () => {
     expect(component.salvar).toHaveBeenCalled();
   });
 
+  it('should emit the retorno event when salvar is called', () => {
+    spyOn(component.retorno, 'emit');
+    component.salvar();
+    expect(component.retorno.emit).toHaveBeenCalled();
+  });
+
 
 });

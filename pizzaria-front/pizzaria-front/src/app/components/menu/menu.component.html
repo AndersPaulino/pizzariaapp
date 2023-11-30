@@ -1,1 +1,12 @@
-<p>menu works!</p>
+<div>
+    <h2>{{ menuTitle }}</h2>
+  
+    <ul>
+      <li *ngFor="let menuItem of menuItems" (click)="handleMenuItemClick(menuItem)" [class.active]="menuItem === activeMenuItem">
+        {{ menuItem }}
+      </li>
+    </ul>
+  
+    <p>{{ content }}</p>
+  </div>
+  

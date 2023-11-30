@@ -11,7 +11,7 @@ describe('EnderecodetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EnderecodetailsComponent],
-      imports: [HttpClientTestingModule,FormsModule],
+      imports: [HttpClientTestingModule, FormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(EnderecodetailsComponent);
@@ -33,7 +33,6 @@ describe('EnderecodetailsComponent', () => {
     expect(numeroInput).toBeTruthy();
   });
 
-
   it('should call salvar method on form submit', () => {
     spyOn(component, 'salvar');
     const form = fixture.nativeElement.querySelector('form');
@@ -49,7 +48,7 @@ describe('EnderecodetailsComponent', () => {
     const ruaInput = compiled.querySelector('input[name="exampleInputText2"]');
     const numeroInput = compiled.querySelector('input[name="exampleInputPassword1"]');
 
-    // Simule a entrada do usuário
+    // Simulate user input
     bairroInput.value = 'Teste Bairro';
     bairroInput.dispatchEvent(new Event('input'));
 
@@ -61,26 +60,27 @@ describe('EnderecodetailsComponent', () => {
 
     fixture.detectChanges();
 
-    // Verifique se as alterações no modelo são refletidas corretamente
+    // Check if model changes are reflected correctly
     expect(component.endereco.bairro).toEqual('Teste Bairro');
     expect(component.endereco.rua).toEqual('Teste Rua');
     expect(component.endereco.numero).toEqual(42);
-}));
+  }));
 
-it('should require bairro field', waitForAsync(() => {
-  const compiled = fixture.debugElement.nativeElement;
-  const form = compiled.querySelector('form');
+  it('should require bairro field', waitForAsync(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    const form = compiled.querySelector('form');
 
-  // Deixe o campo de bairro vazio
-  component.endereco.bairro = '';
-  fixture.detectChanges();
+    // Leave the bairro field empty
+    component.endereco.bairro = '';
+    fixture.detectChanges();
 
-  // Tente enviar o formulário
-  form.dispatchEvent(new Event('submit'));
+    // Try to submit the form
+    form.dispatchEvent(new Event('submit'));
 
-  // Verifique se a validação está correta
-  // Implemente isso de acordo com suas regras de validação específicas
-  expect(component.salvar).not.toHaveBeenCalled(); // Certifique-se de que o método salvar não foi chamado
-}));
+    // Check if validation is correct
+    // Implement this according to your specific validation rules
+    expect(component.salvar).not.toHaveBeenCalled(); // Ensure that the salvar method was not called
+  }));
 
+  
 });

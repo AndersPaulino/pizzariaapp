@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HeaderComponent } from './header.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 
 describe('HeaderComponent', () => {
@@ -12,8 +11,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [HttpClientTestingModule, FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      imports: [RouterTestingModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -24,7 +22,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //CASO DE TESTE 1
+  // CASO DE TESTE 1
   it('TESTE 1 - Criação OK do Componente', () => {
     expect(component).toBeTruthy();
   });
@@ -44,7 +42,7 @@ describe('HeaderComponent', () => {
     ];
 
     linksDeNavegacao.forEach((link, index) => {
-      const href = link.nativeElement.getAttribute('href');
+      const href = link.nativeElement.getAttribute('routerLink');
       expect(href).toBe(rotasEsperadas[index]);
     });
   });

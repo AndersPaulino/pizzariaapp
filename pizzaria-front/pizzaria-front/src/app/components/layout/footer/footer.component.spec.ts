@@ -31,7 +31,8 @@ describe('FooterComponent', () => {
   it('deve conter o texto adequado no parágrafo', () => {
     const paragraphElement: HTMLElement = fixture.nativeElement.querySelector('p');
     expect(paragraphElement).toBeTruthy();
+
+    const expectedText = 'Criado por Anderson Paulino e Matheus Aguiar\nAlunos do 4 Periodo de Engenharia de Software\n©UniÁmerica';
+    expect(paragraphElement.textContent).toContain(expectedText);
   });
-  
-  
 });

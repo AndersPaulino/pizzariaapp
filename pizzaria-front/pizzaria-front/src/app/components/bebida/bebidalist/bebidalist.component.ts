@@ -11,6 +11,7 @@ import { BebidaService } from 'src/app/services/bebida/bebida.service';
 export class BebidaListComponent {
 
   lista: Bebida[] = [];
+  mensagemErro: string | undefined;
 
   @Output() retorno = new EventEmitter<Bebida>();
   @Input() modoLancamento: boolean = false;

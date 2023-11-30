@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject , OnInit} from '@angular/core';
 import { NgbModal , NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Funcionario } from 'src/app/models/funcionario/funcionario';
 import { FuncionarioService } from 'src/app/services/funcionario/funcionario.service';
@@ -8,7 +8,7 @@ import { FuncionarioService } from 'src/app/services/funcionario/funcionario.ser
   templateUrl: './funcionariolist.component.html',
   styleUrls: ['./funcionariolist.component.scss']
 })
-export class FuncionariolistComponent {
+export class FuncionariolistComponent implements OnInit{
 
   lista: Funcionario[] = [];
 
@@ -25,6 +25,10 @@ export class FuncionariolistComponent {
     this.listAll();
   }
 
+  ngOnInit() {
+    this.listAll();
+  }
+  
   listAll() {
     this.funcionarioService.listAll().subscribe({
       next: lista => {
