@@ -19,15 +19,6 @@ describe('VendadetailsComponent', () => {
 
     fixture = TestBed.createComponent(VendadetailsComponent);
     component = fixture.componentInstance;
-
-    // Create a spy object for VendaService
-    const vendaServiceSpy = jasmine.createSpyObj('VendaService', ['deletarVenda']);
-
-    // Override the component's vendaService with the spy object
-    component.vendaService = vendaServiceSpy;
-
-    // Assign the spy object to the local variable for further reference
-    vendaService = TestBed.inject(VendaService) as jasmine.SpyObj<VendaService>;
   });
 
   it('should create', () => {

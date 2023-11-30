@@ -51,4 +51,55 @@ describe('BebidaDetailsComponent', () => {
     expect(valorInput).toBeTruthy();
     expect(submitButton).toBeTruthy();
   }));
+
+  it('should bind the input fields correctly', waitForAsync(() => {
+    const compiled = fixture.debugElement.nativeElement;
+
+    // Simulate user input
+    const nomeInput = compiled.querySelector('input[name="exampleInputText1"]');
+    const valorInput = compiled.querySelector('input[name="exampleInputPassword1"]');
+
+    const mockBebida: Bebida = {
+      id: 1,
+      ativo: true,
+      registro: new Date(),
+      atualizar: new Date(),
+      nomeBebida: 'Test Bebida',
+      valorBebida: 10.99,
+    };
+
+    // Update the component's bebida property with the mock data
+    component.bebida = mockBebida;
+    fixture.detectChanges();
+
+    // Check if the input fields are correctly bound
+    expect(nomeInput.value).toEqual(mockBebida.nomeBebida);
+    expect(parseFloat(valorInput.value)).toEqual(mockBebida.valorBebida);
+}));
+
+
+  it('should update the component property on input changes', waitForAsync(() => {
+    const compiled = fixture.debugElement.nativeElement;
+
+    // Simulate user input
+    const nomeInput = compiled.querySelector('input[name="exampleInputText1"]');
+    const valorInput = compiled.querySelector('input[name="exampleInputPassword1"]');
+
+    // Update input fields with new values
+    const newNome = 'New Test Bebida';
+    const newValor = 15.99;
+
+    // Trigger input events to simulate user typing
+    nomeInput.value = newNome;
+    nomeInput.dispatchEvent(new Event('input'));
+
+    valorInput.value = newValor.toString();
+    valorInput.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    // Check if the component property is correctly updated
+    expect(component.bebida.nomeBebida).toEqual(newNome);
+    expect(component.bebida.valorBebida).toEqual(newValor);
+  }));
 });
