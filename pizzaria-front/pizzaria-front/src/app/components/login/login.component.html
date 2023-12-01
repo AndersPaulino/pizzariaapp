@@ -7,12 +7,12 @@
             <form (ngSubmit)="logar()" class="login-form">
                 <div class="form-group">
                     <label for="loginInput">Login:</label>
-                    <input type="text" class="form-control" id="loginInput" name="loginInput" [(ngModel)]="login.username" required>
+                    <input type="text" class="form-control" id="loginInput" name="loginInput" [(ngModel)]="usuario.login" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="senhaInput">Senha:</label>
-                    <input type="password" class="form-control" id="senhaInput" name="senhaInput" [(ngModel)]="login.password" required>
+                    <input type="password" class="form-control" id="senhaInput" name="senhaInput" [(ngModel)]="usuario.senha" required>
                 </div>
         
                 <button type="submit" class="btn btn-primary">Logar</button>

@@ -8,7 +8,7 @@ import { Funcionario } from 'src/app/models/funcionario/funcionario';
 })
 
 export class FuncionarioService {
-  API: string = 'http://localhost:9090/api/funcionario';
+  API: string = '/api/funcionario';
 
   constructor(private http: HttpClient) {}
 
