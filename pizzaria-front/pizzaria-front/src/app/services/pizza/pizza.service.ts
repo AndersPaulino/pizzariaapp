@@ -8,7 +8,7 @@ import { Pizza } from 'src/app/models/pizza/pizza';
 })
 
 export class PizzaService {
-  API: string = 'http://localhost:9090/api/pizza';
+  API: string = '/api/pizza';
 
   constructor(private http: HttpClient) {}
 

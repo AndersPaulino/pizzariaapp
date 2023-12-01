@@ -7,7 +7,7 @@ import { Bebida } from 'src/app/models/bebida/bebida';
   providedIn: 'root'
 })
 export class BebidaService {
-  API: string = 'http://localhost:9090/api/bebida';
+  API: string = '/api/bebida';
 
   constructor(private http: HttpClient) {}
 

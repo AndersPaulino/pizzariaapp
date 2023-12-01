@@ -8,7 +8,7 @@ import { Venda } from 'src/app/models/venda/venda';
 })
 
 export class VendaService {
-  API: string = 'http://localhost:9090/api/venda';
+  API: string = '/api/venda';
   
   constructor(private http: HttpClient) {}
 

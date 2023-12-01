@@ -8,7 +8,7 @@ import { Sabor } from 'src/app/models/sabor/sabor';
 })
 
 export class SaborService {
-  API: string = 'http://localhost:9090/api/sabor';
+  API: string = '/api/sabor';
   
   constructor(private http: HttpClient) {}
 

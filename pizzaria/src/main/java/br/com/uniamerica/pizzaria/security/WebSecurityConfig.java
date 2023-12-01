@@ -37,12 +37,11 @@ public class WebSecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
-                        /*.requestMatchers("/api/login").permitAll()
-                        .requestMatchers("/api/users").permitAll()
-                       .anyRequest().authenticated())
+                        .requestMatchers("/api/login").permitAll()
+                        .anyRequest().permitAll())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));*/);
+                .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
