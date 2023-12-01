@@ -1,6 +1,7 @@
 export class Usuario {
 
-    login!: string;
-    senha!: string;
-
+    id!:number;
+    username!: string;
+    role!: string;
+    token!: string;
 }
